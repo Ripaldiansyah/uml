@@ -1,0 +1,42 @@
+' ============================================================
+' S-02 · Registrasi akun
+' ============================================================
+@startuml
+skinparam defaultFontName "Segoe UI"
+skinparam defaultFontSize 13
+skinparam ArrowColor #0F0E17
+skinparam ArrowThickness 1.2
+skinparam LifeLineBorderColor #A7A9BE
+skinparam SequenceGroupBorderColor #0F0E17
+skinparam SequenceGroupBackgroundColor #FFF1E0
+skinparam SequenceGroupFontStyle bold
+skinparam ActorBorderColor #0F0E17
+skinparam ActorBackgroundColor #FFFFFE
+skinparam ParticipantBorderColor #0F0E17
+skinparam ParticipantBackgroundColor #FFFFFE
+skinparam shadowing false
+autonumber
+
+actor "Pengunjung" as U
+participant "Halaman daftar" as R
+participant "Pemeriksa isian" as V
+participant "Pengelola akun" as M
+participant "Basis data" as D
+
+U -> R : Membuka halaman pendaftaran
+R --> U : Menampilkan formulir pendaftaran
+U -> R : Mengirim nama, email, dan kata sandi
+R -> V : Memeriksa kelengkapan dan keunikan isian
+V -> D : Mengecek email belum dipakai
+D --> V : Hasil pemeriksaan
+alt isian belum benar
+    V --> R : Daftar kesalahan isian
+    R --> U : Formulir ulang dengan pesan pada isian
+else isian sudah benar
+    R -> M : Menyiapkan akun baru
+    M -> D : Menyimpan akun dengan peran pengguna biasa
+    D --> M : Akun tersimpan
+    M --> R : Akun siap dipakai
+    R --> U : Pemberitahuan berhasil, diarahkan ke halaman masuk
+end
+@enduml

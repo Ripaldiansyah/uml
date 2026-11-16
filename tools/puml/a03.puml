@@ -1,0 +1,47 @@
+' ============================================================
+' A-03 · Mulai konsultasi
+' ============================================================
+@startuml
+skinparam defaultFontName "Segoe UI"
+skinparam defaultFontSize 13
+skinparam ArrowColor #0F0E17
+skinparam ArrowThickness 1.2
+skinparam ActivityBorderColor #0F0E17
+skinparam ActivityBackgroundColor #FFFFFE
+skinparam ActivityBorderThickness 1.1
+skinparam ActivityDiamondBackgroundColor #FFF1E0
+skinparam ActivityDiamondBorderColor #0F0E17
+skinparam SwimlaneTitleBackgroundColor #0F0E17
+skinparam SwimlaneTitleFontColor #FFFFFE
+skinparam SwimlaneTitleFontStyle bold
+skinparam SwimlaneBorderColor #0F0E17
+skinparam shadowing false
+skinparam ActivityPadding 14
+skinparam padding 2
+
+|Pengguna|
+|Sistem|
+
+|Pengguna|
+start
+:Membuka formulir konsultasi baru;
+repeat
+  :Mengisi nama, merek, nomor plat, dan kilometer;
+  |Sistem|
+  if (Basis pengetahuan berisi aturan aktif?) then (Tidak)
+    :Menampilkan peringatan bahwa data aturan masih kosong;
+    stop
+  else (Ada)
+  endif
+  if (Nama, merek, dan kilometer terisi benar?) then (Belum benar)
+    :Menampilkan kembali formulir dengan pesan pada isian yang salah;
+  else (Sudah benar)
+    :Menyiapkan kode konsultasi baru;
+    :Menyimpan data konsultasi berstatus berjalan;
+  endif
+repeat while (Isian belum benar?) is (Ya) not (Sudah benar)
+
+|Pengguna|
+:Masuk ke pertanyaan pertama;
+stop
+@enduml

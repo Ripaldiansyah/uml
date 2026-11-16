@@ -1,0 +1,41 @@
+import { start, connect, node } from './scene.mjs';
+import { activity, U, S, D } from './activity-common.mjs';
+
+export function buildConsult() {
+    const s = activity('A03', 'Aktivitas memeriksa gangguan motor', 1370, 'Pelanggan');
+    start(s, 'st', 169, 50);
+    U(s, 'fill', 100, 'Isi nama pemilik, merek motor, nomor kendaraan, dan jarak tempuh');
+    S(s, 'check', 100, 'Periksa isian utama konsultasi');
+    D(s, 'valid', 210, 'Isian utama sudah lengkap?');
+    U(s, 'fix', 210, 'Baca penjelasan, lalu perbaiki isian utama');
+    U(s, 'target', 360, 'Pilih gangguan yang dicurigai, atau pilih Belum tahu');
+    S(s, 'ready', 360, 'Pastikan ada aturan aktif; bila belum ada, berikan penjelasan untuk menghubungi admin');
+    S(s, 'find', 490, 'Cari aturan yang sesuai dan pilih pertanyaan yang belum terjawab');
+    D(s, 'more', 600, 'Ada pertanyaan yang perlu dijawab?');
+    U(s, 'answer', 760, 'Jawab ya atau tidak; jawaban sebelumnya dapat diubah');
+    S(s, 'save', 760, 'Simpan jawaban dan langkah pemeriksaan');
+    D(s, 'enough', 890, 'Gangguan yang cocok sudah ditemukan?');
+    S(s, 'cost', 1070, 'Hitung biaya jasa dan suku cadang yang dianjurkan');
+    S(s, 'advice', 1170, 'Simpan hasil; tampilkan gangguan, perkiraan biaya, dan saran');
+    U(s, 'print', 1250, 'Cetak atau unduh perintah kerja');
+    connect(s, 'e1', 'st', 'fill');
+    connect(s, 'e2', 'fill', 'check', '', { sides: ['right', 'left'] });
+    connect(s, 'e3', 'check', 'valid');
+    connect(s, 'e4', 'valid', 'fix', 'Belum', { sides: ['left', 'right'], labelX: 359, labelY: 219 });
+    connect(s, 'e5', 'fix', 'fill', '', { sides: ['left', 'left'], points: [{ x: 43, y: 239 }, { x: 43, y: 129 }] });
+    connect(s, 'e6', 'valid', 'target', 'Ya', { labelX: 580, labelY: 332 });
+    connect(s, 'e7', 'target', 'ready', '', { sides: ['right', 'left'] });
+    connect(s, 'e7b', 'ready', 'find');
+    connect(s, 'e8', 'find', 'more');
+    connect(s, 'e9', 'more', 'answer', 'Ya', { sides: ['left', 'top'], middle: 350, labelX: 340, labelY: 718 });
+    connect(s, 'e10', 'answer', 'save', '', { sides: ['right', 'left'] });
+    connect(s, 'e11', 'save', 'enough');
+    connect(s, 'e12', 'enough', 'find', 'Belum', { sides: ['right', 'right'], points: [{ x: 708, y: 934 }, { x: 708, y: 519 }], labelX: 681, labelY: 817 });
+    connect(s, 'e13', 'enough', 'cost', 'Ya', { labelX: 577, labelY: 1025 });
+    connect(s, 'e14', 'cost', 'advice');
+    connect(s, 'e15', 'advice', 'print', '', { sides: ['left', 'top'] });
+    connect(s, 'e18', 'more', 'advice', 'Tidak ada', { sides: ['right', 'right'], points: [{ x: 724, y: 644 }, { x: 724, y: 1199 }], labelX: 697, labelY: 683 });
+    node(s, 'finish', 'end', 542, 1280);
+    connect(s, 'e17', 'advice', 'finish', '', { sides: ['right', 'top'], points: [{ x: 710, y: 1199 }, { x: 710, y: 1252 }, { x: 555, y: 1252 }] });
+    return s;
+}

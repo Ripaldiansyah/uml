@@ -1,0 +1,58 @@
+' ============================================================
+' A-07 · Laporan PDF admin
+' ============================================================
+@startuml
+skinparam defaultFontName "Segoe UI"
+skinparam defaultFontSize 13
+skinparam ArrowColor #0F0E17
+skinparam ArrowThickness 1.2
+skinparam ActivityBorderColor #0F0E17
+skinparam ActivityBackgroundColor #FFFFFE
+skinparam ActivityBorderThickness 1.1
+skinparam ActivityDiamondBackgroundColor #FFF1E0
+skinparam ActivityDiamondBorderColor #0F0E17
+skinparam SwimlaneTitleBackgroundColor #0F0E17
+skinparam SwimlaneTitleFontColor #FFFFFE
+skinparam SwimlaneTitleFontStyle bold
+skinparam SwimlaneBorderColor #0F0E17
+skinparam shadowing false
+skinparam ActivityPadding 14
+skinparam padding 2
+
+|Admin|
+start
+:Membuka menu Laporan;
+if (Masuk sebagai admin?) then (Tidak)
+  |Sistem|
+  :Menolak akses dan kembali ke beranda;
+  stop
+else (Ya)
+  |Sistem|
+  :Menampilkan tujuh pilihan jenis laporan;
+endif
+
+|Admin|
+:Memilih jenis laporan dan rentang tanggal;
+if (Jenis laporan dikenali?) then (Tidak)
+  |Sistem|
+  :Menampilkan halaman tidak ditemukan;
+  stop
+else (Ya)
+  |Sistem|
+  if (Rentang tanggal wajar?) then (Tidak)
+    :Mengembalikan ke rentang bawaan;
+  else (Ya)
+  endif
+  :Menampilkan ringkasan dan pratinjau tabel;
+endif
+
+|Admin|
+:Melihat pratinjau di layar atau menekan Unduh PDF;
+
+|Sistem|
+:Menyusun berkas laporan sesuai jenisnya;
+
+|Admin|
+:Berkas laporan terunduh;
+stop
+@enduml

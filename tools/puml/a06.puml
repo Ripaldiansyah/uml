@@ -1,0 +1,44 @@
+' ============================================================
+' A-06 · Unduh work order PDF
+' ============================================================
+@startuml
+skinparam defaultFontName "Segoe UI"
+skinparam defaultFontSize 13
+skinparam ArrowColor #0F0E17
+skinparam ArrowThickness 1.2
+skinparam ActivityBorderColor #0F0E17
+skinparam ActivityBackgroundColor #FFFFFE
+skinparam ActivityBorderThickness 1.1
+skinparam ActivityDiamondBackgroundColor #FFF1E0
+skinparam ActivityDiamondBorderColor #0F0E17
+skinparam SwimlaneTitleBackgroundColor #0F0E17
+skinparam SwimlaneTitleFontColor #FFFFFE
+skinparam SwimlaneTitleFontStyle bold
+skinparam SwimlaneBorderColor #0F0E17
+skinparam shadowing false
+skinparam ActivityPadding 14
+skinparam padding 2
+
+|Pengguna|
+start
+:Menekan tombol Unduh work order;
+
+|Sistem|
+if (Konsultasi ada dan milik pengguna?) then (Tidak)
+  :Menolak unduhan dengan pesan yang jelas;
+  stop
+else (Ya)
+endif
+if (Sudah ada kerusakan hasil diagnosa?) then (Belum)
+  :Memberi tahu bahwa work order belum bisa dibuat;
+  stop
+else (Ada)
+  :Mengambil data motor, kerusakan, sparepart, dan biaya;
+  :Menyusun halaman work order berukuran A4 tegak;
+  :Menambahkan nomor halaman pada berkas;
+
+  |Pengguna|
+  :Berkas PDF work order terunduh;
+  stop
+endif
+@enduml

@@ -1,0 +1,42 @@
+' ============================================================
+' S-06 · Unduh work order PDF
+' ============================================================
+@startuml
+skinparam defaultFontName "Segoe UI"
+skinparam defaultFontSize 13
+skinparam ArrowColor #0F0E17
+skinparam ArrowThickness 1.2
+skinparam LifeLineBorderColor #A7A9BE
+skinparam SequenceGroupBorderColor #0F0E17
+skinparam SequenceGroupBackgroundColor #FFF1E0
+skinparam SequenceGroupFontStyle bold
+skinparam ActorBorderColor #0F0E17
+skinparam ActorBackgroundColor #FFFFFE
+skinparam ParticipantBorderColor #0F0E17
+skinparam ParticipantBackgroundColor #FFFFFE
+skinparam shadowing false
+autonumber
+
+actor "Pengguna" as U
+participant "Halaman unduhan" as P
+participant "Pengelola konsultasi" as S
+participant "Pembuat berkas" as X
+participant "Basis data" as D
+
+U -> P : Menekan tombol unduh work order
+P -> S : Memeriksa hak akses
+alt tidak berhak
+    S --> U : Akses ditolak
+else berhak
+    S -> D : Mengambil data konsultasi dan hasil
+    D --> S : Data konsultasi
+    alt belum ada hasil diagnosa
+        S --> U : Pemberitahuan work order belum bisa dibuat
+    else hasil tersedia
+        S --> P : Data siap dicetak
+        P -> X : Menyusun halaman work order A4 tegak
+        X --> P : Berkas PDF dengan nomor halaman
+        P --> U : Berkas work order terunduh
+    end
+end
+@enduml

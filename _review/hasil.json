@@ -1,0 +1,39 @@
+{
+  "diagrams": [],
+  "downloads": [],
+  "pages": [
+    {
+      "page": "Alur kerja AKC Workshop · AKC Workshop",
+      "figures": 0,
+      "missing": 0,
+      "overflow": false
+    },
+    {
+      "page": "Diagram aktivitas — Cara kerja layanan · AKC Workshop",
+      "figures": 7,
+      "missing": 0,
+      "overflow": false
+    },
+    {
+      "page": "Diagram urutan — Urutan pesan layanan · AKC Workshop",
+      "figures": 7,
+      "missing": 0,
+      "overflow": false
+    },
+    {
+      "page": "Diagram kasus penggunaan — Layanan AKC Workshop · AKC Workshop",
+      "figures": 1,
+      "missing": 0,
+      "overflow": false
+    },
+    {
+      "page": "Diagram kelas — Informasi servis AKC Workshop · AKC Workshop",
+      "figures": 1,
+      "missing": 0,
+      "overflow": false
+    }
+  ],
+  "errors": [
+    "Error: Unduhan PNG belum selesai.\n    at waitFor (file:///C:/laragon/www/akc_workshop/UML/tools/browser-check.mjs:13:11)\n    at async file:///C:/laragon/www/akc_workshop/UML/tools/browser-check.mjs:51:5"
+  ]
+}

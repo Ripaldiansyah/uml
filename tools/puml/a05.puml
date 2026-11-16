@@ -1,0 +1,45 @@
+' ============================================================
+' A-05 · Menyelesaikan & melihat hasil
+' ============================================================
+@startuml
+skinparam defaultFontName "Segoe UI"
+skinparam defaultFontSize 13
+skinparam ArrowColor #0F0E17
+skinparam ArrowThickness 1.2
+skinparam ActivityBorderColor #0F0E17
+skinparam ActivityBackgroundColor #FFFFFE
+skinparam ActivityBorderThickness 1.1
+skinparam ActivityDiamondBackgroundColor #FFF1E0
+skinparam ActivityDiamondBorderColor #0F0E17
+skinparam SwimlaneTitleBackgroundColor #0F0E17
+skinparam SwimlaneTitleFontColor #FFFFFE
+skinparam SwimlaneTitleFontStyle bold
+skinparam SwimlaneBorderColor #0F0E17
+skinparam shadowing false
+skinparam ActivityPadding 14
+skinparam padding 2
+
+|Pengguna|
+start
+:Membuka halaman hasil diagnosa;
+
+|Sistem|
+if (Konsultasi ada dan boleh dibuka?) then (Tidak)
+  :Menampilkan halaman tidak ditemukan atau akses ditolak;
+  stop
+else (Ya)
+  :Menampilkan ringkasan servis dan data motor;
+endif
+if (Ada kerusakan yang cocok?) then (Tidak)
+  :Menampilkan pesan bahwa gejala belum cocok;
+  :Menyarankan pemeriksaan langsung di bengkel;
+else (Ada)
+  :Menampilkan kerusakan, sparepart, dan perkiraan biaya;
+  :Menampilkan urutan penalaran yang dipakai;
+endif
+:Menyediakan tombol unduh work order;
+
+|Pengguna|
+:Membaca hasil dan memilih langkah berikutnya;
+stop
+@enduml

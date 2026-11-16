@@ -1,0 +1,1640 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Rancangan layar · AKC Workshop</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600&family=Barlow+Condensed:wght@500;600;700&family=JetBrains+Mono:wght@500&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="assets/uml.css">
+    <link rel="icon"
+        href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%230f0e17'/><path d='M8 22 16 8l8 14' stroke='%23ff8906' stroke-width='3.5' fill='none' stroke-linejoin='round'/></svg>">
+</head>
+
+<body>
+    <header class="top">
+        <a class="brand" href="index.html"><svg viewBox="0 0 32 32" width="26" height="26" aria-hidden="true">
+                <rect width="32" height="32" rx="6" fill="#ff8906" />
+                <path d="M8 22 16 8l8 14" stroke="#0f0e17" stroke-width="3.5" fill="none" stroke-linejoin="round" />
+            </svg> AKC Workshop <small>dokumen perancangan</small></a>
+        <nav aria-label="Dokumen">
+            <a href="index.html">Daftar isi</a>
+            <a href="usecase-diagram.html">Use case</a>
+            <a href="class-diagram.html">Class</a>
+            <a href="activity-diagram.html">Activity</a>
+            <a href="sequence-diagram.html">Sequence</a>
+            <a href="rancangan-layar.html" aria-current="page">Rancangan layar</a>
+        </nav>
+    </header>
+
+    <div class="page">
+        <div class="page-intro">
+            <h1>Rancangan layar</h1>
+            <p>Empat belas wireframe: tiga halaman publik, empat halaman konsultasi, dan tujuh halaman admin. Tiap
+                gambar diberi penanda nomor
+                <span class="mk">1</span> yang keterangannya berada tepat di bawah gambar. Tata letak mengikuti Tailwind
+                yang dipakai aplikasi
+                (sidebar 256 px gelap, panel putih, aksen oranye <code>#ff8906</code>, monospace untuk semua kode),
+                bukan sekadar sketsa bebas.
+            </p>
+        </div>
+
+        <nav class="toc" aria-label="Isi halaman">
+            <p>Isi</p>
+            <ol>
+                <li><a href="#w01"><span>W-01</span>Beranda publik</a></li>
+                <li><a href="#w02"><span>W-02</span>Login</a></li>
+                <li><a href="#w03"><span>W-03</span>Registrasi</a></li>
+                <li><a href="#w04"><span>W-04</span>Mulai konsultasi</a></li>
+                <li><a href="#w05"><span>W-05</span>Halaman tanya</a></li>
+                <li><a href="#w06"><span>W-06</span>Hasil diagnosa</a></li>
+                <li><a href="#w07"><span>W-07</span>Riwayat konsultasi</a></li>
+                <li><a href="#w08"><span>W-08</span>Dashboard admin</a></li>
+                <li><a href="#w09"><span>W-09</span>Rule base</a></li>
+                <li><a href="#w10"><span>W-10</span>Form rule</a></li>
+                <li><a href="#w11"><span>W-11</span>Gejala</a></li>
+                <li><a href="#w12"><span>W-12</span>Kerusakan &amp; servis</a></li>
+                <li><a href="#w13"><span>W-13</span>Laporan PDF</a></li>
+                <li><a href="#w14"><span>W-14</span>Pengguna</a></li>
+            </ol>
+        </nav>
+
+        <main>
+            <section class="sheet" id="w01" aria-labelledby="h-w01">
+                <div class="sheet-head">
+                    <h2 id="h-w01">W-01 · Beranda publik</h2>
+                    <p>Halaman pertama yang dilihat calon pelanggan. Fokusnya satu aksi: mulai konsultasi. Di sebelah
+                        kanan ditampilkan contoh
+                        penelusuran agar pengunjung langsung paham cara kerja sistem pakar.</p>
+                </div>
+                <div class="sheet-body">
+                    <div class="wf">
+                        <div class="wf-chrome">
+                            <span class="wf-dots"><i></i><i></i><i></i></span>
+                            <span class="wf-url">akc-workshop.com/index.php</span>
+                        </div>
+                        <div class="wf-main">
+                            <div class="wf-row between">
+                                <div class="wf-row"><span class="wf-logo"
+                                        style="color:var(--ink);border:0;padding:0"><i></i>AKC Workshop</span></div>
+                                <div class="wf-row">
+                                    <span class="wf-sub">Cara kerja</span>
+                                    <span class="wf-sub">Rule base</span>
+                                    <span class="wf-btn sm">Masuk</span>
+                                    <span class="wf-btn sm pri">Daftar</span>
+                                </div>
+                            </div>
+                            <div class="wf-cols" style="grid-template-columns:1.1fr 1fr;align-items:start">
+                                <div class="wf-cols" style="gap:10px">
+                                    <span class="wf-sub" style="color:var(--flame);font-family:var(--mono)">SISTEM
+                                        PENDUKUNG KEPUTUSAN · BACKWARD CHAINING</span>
+                                    <div class="wf-h1">Tahu apa yang perlu diservis sebelum motor masuk bengkel.</div>
+                                    <div class="wf-sub">Jawab pertanyaan Ya/Tidak tentang kondisi motor. Sistem
+                                        menelusuri rule base mekanik
+                                        AKC Workshop untuk menemukan kerusakan, jenis servis, sparepart, dan perkiraan
+                                        biaya.</div>
+                                    <div class="wf-row">
+                                        <span class="wf-btn pri">Buat akun &amp; mulai konsultasi</span>
+                                        <span class="wf-btn">Saya sudah punya akun</span>
+                                    </div>
+                                </div>
+                                <div class="wf-box">
+                                    <div class="wf-head"><span class="wf-sub">Contoh penelusuran</span><span
+                                            class="wf-code">R03</span></div>
+                                    <div class="wf-body">
+                                        <div class="wf-sub">Hipotesis: <b>Kopling aus</b>. Untuk membuktikannya, sistem
+                                            menanyakan premisnya:</div>
+                                        <div class="wf-field"><span class="wf-input" style="display:flex;gap:8px"><span
+                                                    class="wf-code">G04</span> Tarikan motor terasa berat saat
+                                                naik</span></div>
+                                        <div class="wf-field"><span class="wf-input" style="display:flex;gap:8px"><span
+                                                    class="wf-code">G11</span> Suara mesin kasar di putaran
+                                                tinggi</span></div>
+                                        <div class="wf-field"><span class="wf-input" style="display:flex;gap:8px"><span
+                                                    class="wf-code">G19</span> Getaran berlebih pada stang</span></div>
+                                        <div class="wf-input"
+                                            style="background:var(--flame);color:var(--ink);border-color:var(--flame);font-weight:600">
+                                            Terbukti → K05 Kopling aus</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="wf-stats" style="grid-template-columns:repeat(4,minmax(0,1fr))">
+                                <div><b>26</b><span class="wf-sub">Gejala dikenali</span></div>
+                                <div><b>12</b><span class="wf-sub">Jenis kerusakan</span></div>
+                                <div><b>18</b><span class="wf-sub">Rule aktif</span></div>
+                                <div><b>24</b><span class="wf-sub">Sparepart terdata</span></div>
+                            </div>
+                        </div>
+                    </div>
+                    <ul class="notes" style="margin-top:16px">
+                        <li><span class="mk">1</span><span>Navigasi publik tanpa sidebar: hanya tautan masuk dan daftar.
+                                Setelah login, tautan berganti menjadi menu konsultasi.</span></li>
+                        <li><span class="mk">2</span><span>Judul utama satu-satunya elemen besar; dipakai sebagai
+                                <code>h1</code> untuk struktur dokumen yang benar.</span></li>
+                        <li><span class="mk">3</span><span>Pengunjung melihat dua tombol (daftar/masuk); pengguna yang
+                                sudah login melihat tombol <b>Mulai konsultasi</b> langsung.</span></li>
+                        <li><span class="mk">4</span><span>Contoh penelusuran diambil dari rule nyata
+                                (<code>Rule::findWithPremis()</code>) sehingga selalu mencerminkan isi basis
+                                pengetahuan.</span></li>
+                        <li><span class="mk">5</span><span>Angka statistik berasal dari <code>count()</code> tiap tabel
+                                dan rule aktif, bukan angka statis.</span></li>
+                    </ul>
+                </div>
+                <div class="titleblock">
+                    <div><span>Lembar</span><b>W-01</b></div>
+                    <div><span>Judul</span><b>Beranda publik</b></div>
+                    <div><span>Sumber</span><code>app/views/landing.php</code></div>
+                    <div><span>Akses</span><b>Publik</b></div>
+                </div>
+            </section>
+            <section class="sheet" id="w02" aria-labelledby="h-w02">
+                <div class="sheet-head">
+                    <h2 id="h-w02">W-02 · Login</h2>
+                    <p>Halaman berpusat satu kolom (layout <code>layouts/plain</code>) agar tidak terasa seperti
+                        aplikasi admin.
+                        Galat ditampilkan di atas formulir dan di bawah field terkait.</p>
+                </div>
+                <div class="sheet-body">
+                    <div class="wf">
+                        <div class="wf-chrome">
+                            <span class="wf-dots"><i></i><i></i><i></i></span>
+                            <span class="wf-url">akc-workshop.com/auth/login.php</span>
+                        </div>
+                        <div class="wf-plain">
+                            <div style="width:100%;max-width:380px;display:grid;gap:14px">
+                                <div class="wf-row" style="justify-content:center"><span class="wf-logo"
+                                        style="color:var(--ink);border:0;padding:0"><i></i>AKC Workshop</span></div>
+                                <div class="wf-box">
+                                    <div class="wf-head"><span class="wf-h2">Masuk</span><span class="wf-sub">Satu akun
+                                            untuk semua peran</span></div>
+                                    <div class="wf-body">
+                                        <div class="wf-input"
+                                            style="border-color:var(--coral);color:#b03a2b;background:#fdf0ee">
+                                            Username atau password salah.</div>
+                                        <div class="wf-field"><span>Username atau email</span><span
+                                                class="wf-input">budi.akc</span></div>
+                                        <div class="wf-field"><span>Password</span><span
+                                                class="wf-input">••••••••</span>
+                                            <span class="wf-hint" style="color:#b03a2b">Password wajib diisi.</span>
+                                        </div>
+                                        <span class="wf-btn pri big">Masuk</span>
+                                        <span class="wf-hint" style="text-align:center">Belum punya akun?
+                                            <b>Daftar</b></span>
+                                    </div>
+                                </div>
+                                <span class="wf-hint" style="text-align:center">Kembali ke beranda</span>
+                            </div>
+                        </div>
+                    </div>
+                    <ul class="notes" style="margin-top:16px">
+                        <li><span class="mk">1</span><span>Kotak galat merangkum kegagalan autentikasi; pesan tidak
+                                menyebut field mana yang salah agar tidak memudahkan penebakan akun.</span></li>
+                        <li><span class="mk">2</span><span>Satu field menerima username atau email
+                                (<code>Auth::attempt()</code> mencari keduanya dalam satu query).</span></li>
+                        <li><span class="mk">3</span><span>Galat validasi per field ditampilkan persis di bawah input,
+                                bukan hanya di ringkasan atas.</span></li>
+                        <li><span class="mk">4</span><span>Tautan ke registrasi disembunyikan bila
+                                <code>allow_register = false</code>.</span></li>
+                        <li><span class="mk">5</span><span>Setelah berhasil, pengguna admin diarahkan ke dashboard dan
+                                guest ke riwayat konsultasi.</span></li>
+                    </ul>
+                </div>
+                <div class="titleblock">
+                    <div><span>Lembar</span><b>W-02</b></div>
+                    <div><span>Judul</span><b>Login</b></div>
+                    <div><span>Sumber</span><code>app/views/auth/login.php</code></div>
+                    <div><span>Akses</span><b>Pengunjung</b></div>
+                </div>
+            </section>
+            <section class="sheet" id="w03" aria-labelledby="h-w03">
+                <div class="sheet-head">
+                    <h2 id="h-w03">W-03 · Registrasi</h2>
+                    <p>Formulir pendek empat field dengan indikator kekuatan password dan konfirmasi, karena syarat
+                        minimal 8 karakter
+                        perlu terlihat sebelum tombol ditekan.</p>
+                </div>
+                <div class="sheet-body">
+                    <div class="wf">
+                        <div class="wf-chrome">
+                            <span class="wf-dots"><i></i><i></i><i></i></span>
+                            <span class="wf-url">akc-workshop.com/auth/register.php</span>
+                        </div>
+                        <div class="wf-plain">
+                            <div style="width:100%;max-width:460px;display:grid;gap:14px">
+                                <div class="wf-box">
+                                    <div class="wf-head"><span class="wf-h2">Buat akun</span><span class="wf-badge">role
+                                            guest</span></div>
+                                    <div class="wf-body">
+                                        <div class="wf-field"><span>Nama lengkap</span><span class="wf-input">Budi
+                                                Santoso</span></div>
+                                        <div class="wf-field"><span>Username</span><span
+                                                class="wf-input">budi.akc</span></div>
+                                        <div class="wf-field"><span>Email</span><span class="wf-input"
+                                                style="border-color:var(--coral)">budi@</span>
+                                            <span class="wf-hint" style="color:#b03a2b">Format email tidak valid.</span>
+                                        </div>
+                                        <div class="wf-cols" style="grid-template-columns:1fr 1fr">
+                                            <div class="wf-field"><span>Password</span><span
+                                                    class="wf-input">••••••</span></div>
+                                            <div class="wf-field"><span>Ulangi password</span><span
+                                                    class="wf-input">••••••</span></div>
+                                        </div>
+                                        <div class="wf-progress" aria-hidden="true"><i style="width:35%"></i></div>
+                                        <span class="wf-hint">Minimal 8 karakter.</span>
+                                        <span class="wf-btn pri big">Daftar</span>
+                                    </div>
+                                </div>
+                                <span class="wf-hint" style="text-align:center">Sudah punya akun? <b>Masuk</b></span>
+                            </div>
+                        </div>
+                    </div>
+                    <ul class="notes" style="margin-top:16px">
+                        <li><span class="mk">1</span><span>Role tidak dapat dipilih; sistem selalu menyimpan
+                                <code>guest</code> dan menampilkannya sebagai lencana agar pengguna tahu hak
+                                aksesnya.</span></li>
+                        <li><span class="mk">2</span><span>Username wajib karena dipakai untuk login selain
+                                email.</span></li>
+                        <li><span class="mk">3</span><span>Galat email muncul langsung saat pengiriman gagal; nilai lama
+                                tetap dipertahankan lewat <code>Session::pullOld()</code>.</span></li>
+                        <li><span class="mk">4</span><span>Password dan konfirmasi bersebelahan agar mudah dibandingkan;
+                                isinya tidak pernah diisi ulang saat validasi gagal.</span></li>
+                        <li><span class="mk">5</span><span>Sukses menampilkan flash lalu mengalihkan ke halaman login,
+                                bukan langsung membuat sesi.</span></li>
+                    </ul>
+                </div>
+                <div class="titleblock">
+                    <div><span>Lembar</span><b>W-03</b></div>
+                    <div><span>Judul</span><b>Registrasi</b></div>
+                    <div><span>Sumber</span><code>app/views/auth/register.php</code></div>
+                    <div><span>Akses</span><b>Pengunjung</b></div>
+                </div>
+            </section>
+            <section class="sheet" id="w04" aria-labelledby="h-w04">
+                <div class="sheet-head">
+                    <h2 id="h-w04">W-04 · Mulai konsultasi</h2>
+                    <p>Identitas kendaraan menjadi kepala work order. Target hipotesis sengaja opsional dan diletakkan
+                        terpisah, karena pengguna umumnya
+                        hanya ingin tahu kerusakannya.</p>
+                </div>
+                <div class="sheet-body">
+                    <div class="wf">
+                        <div class="wf-chrome">
+                            <span class="wf-dots"><i></i><i></i><i></i></span>
+                            <span class="wf-url">akc-workshop.com/konsultasi/create.php</span>
+                        </div>
+                        <div class="wf-app">
+                            <aside class="wf-side">
+                                <div class="wf-logo"><i></i>AKC Workshop</div>
+                                <div class="wf-group">Menu</div>
+                                <div class="wf-nav on">Konsultasi baru</div>
+                                <div class="wf-nav">Riwayat saya</div>
+                                <div class="wf-nav">Profil</div>
+                                <div class="wf-user"><i></i><span>Budi Santoso<br><span
+                                            style="color:var(--mist)">guest</span></span></div>
+                            </aside>
+                            <div class="wf-main">
+                                <div class="wf-row between">
+                                    <div>
+                                        <div class="wf-h1">Konsultasi baru</div>
+                                        <div class="wf-sub">Isi data kendaraan, lalu jawab pertanyaan Ya/Tidak.</div>
+                                    </div>
+                                    <span class="wf-badge">Langkah 1 dari 3</span>
+                                </div>
+                                <div class="wf-box">
+                                    <div class="wf-head"><span class="wf-h2">Identitas kendaraan</span><span
+                                            class="wf-sub">wajib</span></div>
+                                    <div class="wf-body">
+                                        <div class="wf-cols" style="grid-template-columns:1fr 1fr">
+                                            <div class="wf-field"><span>Nama pemilik</span><span class="wf-input">Budi
+                                                    Santoso</span></div>
+                                            <div class="wf-field"><span>Merk / tipe motor</span><span
+                                                    class="wf-input">Honda Vario 125</span></div>
+                                            <div class="wf-field"><span>Plat nomor</span><span class="wf-input">AB 1234
+                                                    CD</span></div>
+                                            <div class="wf-field"><span>Kilometer</span><span
+                                                    class="wf-input">38.500</span></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="wf-box">
+                                    <div class="wf-head"><span class="wf-h2">Target hipotesis</span><span
+                                            class="wf-badge">opsional</span></div>
+                                    <div class="wf-body">
+                                        <div class="wf-field"><span>Perkiraan kerusakan</span>
+                                            <span class="wf-input sel">Telusuri semua kerusakan</span>
+                                            <span class="wf-hint">Bila dipilih, sistem hanya menguji rule untuk
+                                                kerusakan tersebut sehingga pertanyaan lebih singkat.</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="wf-row between">
+                                    <span class="wf-hint">Data dapat dilihat lagi di riwayat setelah konsultasi
+                                        dimulai.</span>
+                                    <span class="wf-btn pri">Mulai konsultasi</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <ul class="notes" style="margin-top:16px">
+                        <li><span class="mk">1</span><span>Sidebar guest hanya tiga menu; admin memakai sidebar berbeda
+                                dengan grup basis pengetahuan dan operasional.</span></li>
+                        <li><span class="mk">2</span><span>Indikator langkah memberi tahu bahwa masih ada dua tahap:
+                                menjawab dan melihat hasil.</span></li>
+                        <li><span class="mk">3</span><span>Nama dan merk wajib; plat dan kilometer opsional. Plat
+                                otomatis diubah ke huruf besar.</span></li>
+                        <li><span class="mk">4</span><span>Target hipotesis kosong berarti menelusuri seluruh rule
+                                aktif. Ini pilihan default agar calon pelanggan tidak bingung.</span></li>
+                        <li><span class="mk">5</span><span>Tombol utama tunggal di kanan bawah, mengikuti arah baca
+                                formulir.</span></li>
+                    </ul>
+                </div>
+                <div class="titleblock">
+                    <div><span>Lembar</span><b>W-04</b></div>
+                    <div><span>Judul</span><b>Mulai konsultasi</b></div>
+                    <div><span>Sumber</span><code>app/views/konsultasi/create.php</code></div>
+                    <div><span>Akses</span><b>Guest, Admin, publik</b></div>
+                </div>
+            </section>
+            <section class="sheet" id="w05" aria-labelledby="h-w05">
+                <div class="sheet-head">
+                    <h2 id="h-w05">W-05 · Halaman tanya</h2>
+                    <p>Layar paling menentukan: satu pertanyaan besar, dua tombol jawaban, dan panel kanan yang
+                        menjelaskan mengapa pertanyaan itu
+                        diajukan (hipotesis yang sedang diuji beserta premisnya).</p>
+                </div>
+                <div class="sheet-body">
+                    <div class="wf">
+                        <div class="wf-chrome">
+                            <span class="wf-dots"><i></i><i></i><i></i></span>
+                            <span class="wf-url">akc-workshop.com/konsultasi/tanya.php?id=42</span>
+                        </div>
+                        <div class="wf-app">
+                            <aside class="wf-side">
+                                <div class="wf-logo"><i></i>AKC Workshop</div>
+                                <div class="wf-group">Menu</div>
+                                <div class="wf-nav on">Konsultasi baru</div>
+                                <div class="wf-nav">Riwayat saya</div>
+                                <div class="wf-nav">Profil</div>
+                                <div class="wf-user"><i></i><span>Budi Santoso<br><span
+                                            style="color:var(--mist)">guest</span></span></div>
+                            </aside>
+                            <div class="wf-main">
+                                <div class="wf-row between">
+                                    <span class="wf-sub"><span class="wf-code">KS260111042</span> · Honda Vario 125 · AB
+                                        1234 CD</span>
+                                    <span class="wf-hint" style="color:#b03a2b">Batalkan konsultasi</span>
+                                </div>
+                                <div class="wf-cols" style="grid-template-columns:minmax(0,1fr) 280px">
+                                    <div class="wf-box">
+                                        <div class="wf-head">
+                                            <span class="wf-sub">Pertanyaan 4</span>
+                                            <span class="wf-sub">7 dari 18 rule sudah gugur</span>
+                                        </div>
+                                        <div class="wf-body">
+                                            <div class="wf-progress"><i style="width:39%"></i></div>
+                                            <span class="wf-code" style="justify-self:start">G11</span>
+                                            <div class="wf-h1" style="font-size:22px">Apakah terdengar suara kasar dari
+                                                mesin saat tarikan gas dibuka?</div>
+                                            <div class="wf-cols" style="grid-template-columns:1fr 1fr;margin-top:6px">
+                                                <span class="wf-btn pri big">Ya</span>
+                                                <span class="wf-btn big">Tidak</span>
+                                            </div>
+                                            <span class="wf-hint">Ubah jawaban sebelumnya</span>
+                                        </div>
+                                    </div>
+                                    <div class="wf-cols" style="gap:12px;align-content:start">
+                                        <div class="wf-box">
+                                            <div class="wf-body">
+                                                <span class="wf-sub">Hipotesis yang sedang diuji</span>
+                                                <div class="wf-h2">Kopling aus</div>
+                                                <span class="wf-hint">Rule R03 — semua premis harus "Ya" agar
+                                                    terbukti.</span>
+                                                <div class="wf-strip">
+                                                    <span class="g">G04</span><span class="g">G08</span>
+                                                    <span class="a">G11</span><span>G19</span>
+                                                </div>
+                                                <div class="wf-hint">Terang = sudah ya · garis putus-putus = sedang
+                                                    ditanya</div>
+                                            </div>
+                                        </div>
+                                        <div class="wf-box">
+                                            <div class="wf-body">
+                                                <span class="wf-sub">Jawaban tercatat</span>
+                                                <div class="wf-strip">
+                                                    <span class="y">G04 ya</span><span class="y">G08 ya</span>
+                                                    <span>G01 tidak</span><span>G02 tidak</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <ul class="notes" style="margin-top:16px">
+                        <li><span class="mk">1</span><span>Kepala dokumen menampilkan kode konsultasi, motor, dan plat
+                                agar pengguna yakin berada di sesi yang benar.</span></li>
+                        <li><span class="mk">2</span><span>Nomor pertanyaan dan jumlah rule yang sudah gugur
+                                memperlihatkan kemajuan, bukan sekadar nomor urut.</span></li>
+                        <li><span class="mk">3</span><span>Bar progres mengukur rule yang tereliminasi: makin banyak,
+                                makin dekat ke kesimpulan.</span></li>
+                        <li><span class="mk">4</span><span>Dua tombol berukuran sama besar supaya tidak ada jawaban yang
+                                terasa "disarankan".</span></li>
+                        <li><span class="mk">5</span><span>Tautan ubah jawaban hanya muncul setelah ada jawaban
+                                tersimpan; pembatalan memakai konfirmasi peramban.</span></li>
+                        <li><span class="mk">6</span><span>Panel kanan menjelaskan hipotesis aktif sehingga pengguna
+                                memahami alasan pertanyaan (transparansi penalaran).</span></li>
+                    </ul>
+                </div>
+                <div class="titleblock">
+                    <div><span>Lembar</span><b>W-05</b></div>
+                    <div><span>Judul</span><b>Halaman tanya</b></div>
+                    <div><span>Sumber</span><code>app/views/konsultasi/tanya.php</code></div>
+                    <div><span>Akses</span><b>Guest, Admin</b></div>
+                </div>
+            </section>
+            <section class="sheet" id="w06" aria-labelledby="h-w06">
+                <div class="sheet-head">
+                    <h2 id="h-w06">W-06 · Hasil diagnosa</h2>
+                    <p>Halaman ini berfungsi sebagai work order: apa kerusakannya, atas dasar rule apa, sparepart apa
+                        yang diganti,
+                        berapa perkiraan biayanya, dan bagaimana sistem sampai pada kesimpulan itu.</p>
+                </div>
+                <div class="sheet-body">
+                    <div class="wf">
+                        <div class="wf-chrome">
+                            <span class="wf-dots"><i></i><i></i><i></i></span>
+                            <span class="wf-url">akc-workshop.com/konsultasi/hasil.php?id=42</span>
+                        </div>
+                        <div class="wf-app">
+                            <aside class="wf-side">
+                                <div class="wf-logo"><i></i>AKC Workshop</div>
+                                <div class="wf-group">Menu</div>
+                                <div class="wf-nav">Konsultasi baru</div>
+                                <div class="wf-nav on">Riwayat saya</div>
+                                <div class="wf-nav">Profil</div>
+                                <div class="wf-user"><i></i><span>Budi Santoso<br><span
+                                            style="color:var(--mist)">guest</span></span></div>
+                            </aside>
+                            <div class="wf-main">
+                                <div class="wf-row between">
+                                    <div>
+                                        <div class="wf-sub"><span class="wf-code">KS260111042</span> · 11 Jan 2026 ·
+                                            Budi Santoso</div>
+                                        <div class="wf-h1">Honda Vario 125 · AB 1234 CD</div>
+                                        <div class="wf-sub">38.500 km · selesai dalam 9 pertanyaan</div>
+                                    </div>
+                                    <div class="wf-row">
+                                        <span class="wf-btn">Konsultasi lagi</span>
+                                        <span class="wf-btn pri">Unduh PDF</span>
+                                    </div>
+                                </div>
+                                <div class="wf-box" style="border-color:var(--flame);border-left-width:4px">
+                                    <div class="wf-body"
+                                        style="grid-template-columns:minmax(0,1fr) auto;align-items:center">
+                                        <div>
+                                            <span class="wf-sub">Diagnosa sistem · rule R03 terbukti</span>
+                                            <div class="wf-h1">K05 Kopling aus</div>
+                                            <span class="wf-badge f">Servis Sedang</span>
+                                            <span class="wf-hint">Semua premis R03 terjawab ya sehingga hipotesis
+                                                terbukti.</span>
+                                        </div>
+                                        <div style="text-align:right">
+                                            <span class="wf-sub">Estimasi biaya</span>
+                                            <div class="wf-h1">Rp 245.000</div>
+                                            <span class="wf-hint">jasa 65.000 + sparepart 180.000</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="wf-cols" style="grid-template-columns:1.2fr 1fr">
+                                    <div class="wf-box">
+                                        <div class="wf-head"><span class="wf-h2">Sparepart yang perlu
+                                                diganti</span><span class="wf-badge">3 item</span></div>
+                                        <table class="wf-table">
+                                            <thead>
+                                                <tr>
+                                                    <th>Kode</th>
+                                                    <th>Nama</th>
+                                                    <th>Qty</th>
+                                                    <th class="r">Harga</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td><span class="wf-code">SP04</span></td>
+                                                    <td>Kampas kopling</td>
+                                                    <td>1 set</td>
+                                                    <td class="r">95.000</td>
+                                                </tr>
+                                                <tr>
+                                                    <td><span class="wf-code">SP07</span></td>
+                                                    <td>Per kopling</td>
+                                                    <td>3</td>
+                                                    <td class="r">45.000</td>
+                                                </tr>
+                                                <tr>
+                                                    <td><span class="wf-code">SP12</span></td>
+                                                    <td>Oli gardan</td>
+                                                    <td>1</td>
+                                                    <td class="r">40.000</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <div class="wf-box">
+                                        <div class="wf-head"><span class="wf-h2">Langkah servis</span></div>
+                                        <div class="wf-body">
+                                            <span class="wf-sub">Solusi dari data kerusakan</span>
+                                            <div class="wf-line" style="--w:100%"></div>
+                                            <div class="wf-line" style="--w:92%"></div>
+                                            <div class="wf-line" style="--w:96%"></div>
+                                            <div class="wf-line" style="--w:70%"></div>
+                                            <span class="wf-hint">Bawa work order ini ke meja mekanik.</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="wf-box">
+                                    <div class="wf-head"><span class="wf-h2">Jejak penalaran</span><span
+                                            class="wf-sub">rule gugur dan terbukti</span></div>
+                                    <div class="wf-body">
+                                        <div class="wf-strip">
+                                            <span>R01 gugur — G01 tidak</span>
+                                            <span>R02 gugur — G03 tidak</span>
+                                            <span class="g">R03 terbukti</span>
+                                            <span>R05 tidak diuji</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <ul class="notes" style="margin-top:16px">
+                        <li><span class="mk">1</span><span>Kepala dokumen memuat kode, tanggal, pemilik, motor, plat,
+                                dan kilometer — sama dengan kop PDF agar mudah dicocokkan.</span></li>
+                        <li><span class="mk">2</span><span>Kartu diagnosa diberi garis kiri oranye dan menyebut rule
+                                pembuktian, jadi kesimpulan tidak tampil sebagai kotak hitam.</span></li>
+                        <li><span class="mk">3</span><span>Estimasi biaya dipisah dari daftar sparepart: pengguna
+                                melihat total dulu, rinciannya di bawah.</span></li>
+                        <li><span class="mk">4</span><span>Tabel sparepart menampilkan kode, jumlah, dan harga satuan
+                                sehingga total bisa diperiksa sendiri.</span></li>
+                        <li><span class="mk">5</span><span>Jejak penalaran ditampilkan ringkas; versi lengkap masuk ke
+                                PDF dan halaman detail.</span></li>
+                        <li><span class="mk">6</span><span>Bila tidak ada kerusakan terbukti, kartu diganti pesan
+                                "gejala belum cocok" dan tombol PDF disembunyikan.</span></li>
+                    </ul>
+                </div>
+                <div class="titleblock">
+                    <div><span>Lembar</span><b>W-06</b></div>
+                    <div><span>Judul</span><b>Hasil diagnosa</b></div>
+                    <div><span>Sumber</span><code>app/views/konsultasi/hasil.php</code></div>
+                    <div><span>Akses</span><b>Pemilik, Admin</b></div>
+                </div>
+            </section>
+            <section class="sheet" id="w07" aria-labelledby="h-w07">
+                <div class="sheet-head">
+                    <h2 id="h-w07">W-07 · Riwayat konsultasi</h2>
+                    <p>Daftar konsultasi milik pengguna sendiri. Satu baris harus cukup untuk memutuskan tindakan
+                        berikutnya:
+                        lanjutkan yang masih proses, atau buka hasil yang sudah selesai.</p>
+                </div>
+                <div class="sheet-body">
+                    <div class="wf">
+                        <div class="wf-chrome">
+                            <span class="wf-dots"><i></i><i></i><i></i></span>
+                            <span class="wf-url">akc-workshop.com/konsultasi/index.php?status=selesai&amp;q=vario</span>
+                        </div>
+                        <div class="wf-app">
+                            <aside class="wf-side">
+                                <div class="wf-logo"><i></i>AKC Workshop</div>
+                                <div class="wf-group">Menu</div>
+                                <div class="wf-nav">Konsultasi baru</div>
+                                <div class="wf-nav on">Riwayat saya</div>
+                                <div class="wf-nav">Profil</div>
+                                <div class="wf-user"><i></i><span>Budi Santoso<br><span
+                                            style="color:var(--mist)">guest</span></span></div>
+                            </aside>
+                            <div class="wf-main">
+                                <div class="wf-row between">
+                                    <div>
+                                        <div class="wf-h1">Riwayat konsultasi</div>
+                                        <div class="wf-sub">6 konsultasi · 4 selesai · 2 masih proses</div>
+                                    </div>
+                                    <span class="wf-btn pri">Konsultasi baru</span>
+                                </div>
+                                <div class="wf-row">
+                                    <span class="wf-input" style="flex:1">Cari kode, nama, plat…</span>
+                                    <span class="wf-input sel" style="width:150px">Status: selesai</span>
+                                    <span class="wf-input" style="width:130px">Dari tanggal</span>
+                                    <span class="wf-input" style="width:130px">Sampai</span>
+                                    <span class="wf-btn">Terapkan</span>
+                                </div>
+                                <div class="wf-box">
+                                    <table class="wf-table">
+                                        <thead>
+                                            <tr>
+                                                <th>Kode</th>
+                                                <th>Tanggal</th>
+                                                <th>Motor / plat</th>
+                                                <th>Hasil</th>
+                                                <th>Status</th>
+                                                <th class="r">Estimasi</th>
+                                                <th></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td><span class="wf-code">KS260111042</span></td>
+                                                <td>11 Jan 2026</td>
+                                                <td>Vario 125 · AB 1234 CD</td>
+                                                <td>K05 Kopling aus</td>
+                                                <td><span class="wf-badge f">selesai</span></td>
+                                                <td class="r">245.000</td>
+                                                <td><span class="wf-btn sm">Hasil</span></td>
+                                            </tr>
+                                            <tr>
+                                                <td><span class="wf-code">KS260109017</span></td>
+                                                <td>9 Jan 2026</td>
+                                                <td>Vario 125 · AB 1234 CD</td>
+                                                <td>K02 Busi kotor</td>
+                                                <td><span class="wf-badge f">selesai</span></td>
+                                                <td class="r">85.000</td>
+                                                <td><span class="wf-btn sm">Hasil</span></td>
+                                            </tr>
+                                            <tr>
+                                                <td><span class="wf-code">KS260108011</span></td>
+                                                <td>8 Jan 2026</td>
+                                                <td>Vario 125 · AB 1234 CD</td>
+                                                <td><span class="wf-badge c">tidak ditemukan</span></td>
+                                                <td><span class="wf-badge f">selesai</span></td>
+                                                <td class="r">—</td>
+                                                <td><span class="wf-btn sm">Hasil</span></td>
+                                            </tr>
+                                            <tr>
+                                                <td><span class="wf-code">KS260112003</span></td>
+                                                <td>12 Jan 2026</td>
+                                                <td>Vario 125 · AB 1234 CD</td>
+                                                <td class="wf-sub">pertanyaan 5 dari 12</td>
+                                                <td><span class="wf-badge">proses</span></td>
+                                                <td class="r">—</td>
+                                                <td><span class="wf-btn sm pri">Lanjutkan</span></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                    <div class="wf-row between"
+                                        style="padding:8px 12px;border-top:1px solid var(--wf-line)">
+                                        <span class="wf-hint">1–10 dari 6 konsultasi</span>
+                                        <div class="wf-row"><span class="wf-ico">&lt;</span><span
+                                                class="wf-ico">1</span><span class="wf-ico">&gt;</span></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <ul class="notes" style="margin-top:16px">
+                        <li><span class="mk">1</span><span>Ringkasan kecil memberi konteks sebelum tabel: berapa banyak
+                                konsultasi dan berapa yang masih berjalan.</span></li>
+                        <li><span class="mk">2</span><span>Filter memakai partial <code>konsultasi_filter</code> yang
+                                sama dengan halaman admin, jadi perilakunya konsisten.</span></li>
+                        <li><span class="mk">3</span><span>Baris tanpa kerusakan tetap ditampilkan dengan lencana "tidak
+                                ditemukan" agar pengguna tidak mengira datanya hilang.</span></li>
+                        <li><span class="mk">4</span><span>Konsultasi berstatus proses menampilkan tombol
+                                <b>Lanjutkan</b> yang mengarah ke halaman tanya, bukan halaman hasil.</span></li>
+                        <li><span class="mk">5</span><span>Estimasi ditampilkan tanpa "Rp" di kolom angka agar rata
+                                kanan dan mudah dibandingkan.</span></li>
+                    </ul>
+                </div>
+                <div class="titleblock">
+                    <div><span>Lembar</span><b>W-07</b></div>
+                    <div><span>Judul</span><b>Riwayat konsultasi</b></div>
+                    <div><span>Sumber</span><code>app/views/konsultasi/index.php</code></div>
+                    <div><span>Akses</span><b>Guest</b></div>
+                </div>
+            </section>
+            <section class="sheet" id="w08" aria-labelledby="h-w08">
+                <div class="sheet-head">
+                    <h2 id="h-w08">W-08 · Dashboard admin</h2>
+                    <p>Rumah bagi pemilik bengkel: seberapa ramai konsultasi minggu ini, kerusakan apa yang paling
+                        sering muncul,
+                        dan bagian basis pengetahuan mana yang perlu ditambah.</p>
+                </div>
+                <div class="sheet-body">
+                    <div class="wf">
+                        <div class="wf-chrome">
+                            <span class="wf-dots"><i></i><i></i><i></i></span>
+                            <span class="wf-url">akc-workshop.com/admin/index.php</span>
+                        </div>
+                        <div class="wf-app">
+                            <aside class="wf-side">
+                                <div class="wf-logo"><i></i>AKC Workshop</div>
+                                <div class="wf-nav on">Dashboard</div>
+                                <div class="wf-group">Basis pengetahuan</div>
+                                <div class="wf-nav">Rule base</div>
+                                <div class="wf-nav">Gejala</div>
+                                <div class="wf-nav">Kerusakan &amp; servis</div>
+                                <div class="wf-nav">Sparepart</div>
+                                <div class="wf-group">Operasional</div>
+                                <div class="wf-nav">Konsultasi baru</div>
+                                <div class="wf-nav">Riwayat konsultasi</div>
+                                <div class="wf-nav">Pengguna</div>
+                                <div class="wf-nav">Laporan PDF</div>
+                                <div class="wf-user"><i></i><span>Andi Kepala Bengkel<br><span
+                                            style="color:var(--mist)">admin</span></span></div>
+                            </aside>
+                            <div class="wf-main">
+                                <div class="wf-row between">
+                                    <div>
+                                        <div class="wf-h1">Dashboard</div>
+                                        <div class="wf-sub">Ringkasan per 13 November 2026</div>
+                                    </div>
+                                    <div class="wf-row"><span class="wf-btn">Konsultasi baru</span><span
+                                            class="wf-btn pri">Laporan PDF</span></div>
+                                </div>
+                                <div class="wf-stats">
+                                    <div><b>128</b><span class="wf-sub">Konsultasi bulan ini</span></div>
+                                    <div><b>96</b><span class="wf-sub">Selesai</span></div>
+                                    <div><b>75%</b><span class="wf-sub">Kerusakan teridentifikasi</span></div>
+                                    <div><b>Rp 18,4 jt</b><span class="wf-sub">Estimasi biaya</span></div>
+                                </div>
+                                <div class="wf-cols" style="grid-template-columns:1.3fr 1fr">
+                                    <div class="wf-box">
+                                        <div class="wf-head"><span class="wf-h2">Konsultasi tujuh hari
+                                                terakhir</span><span class="wf-sub">per hari</span></div>
+                                        <div class="wf-body">
+                                            <div class="wf-bars">
+                                                <i style="height:40%"></i><i style="height:62%"></i><i
+                                                    style="height:48%"></i>
+                                                <i style="height:80%"></i><i style="height:70%"></i><i
+                                                    style="height:95%"></i><i style="height:55%"></i>
+                                            </div>
+                                            <div class="wf-row" style="justify-content:space-between">
+                                                <span class="wf-hint">Jum</span><span class="wf-hint">Sab</span><span
+                                                    class="wf-hint">Min</span>
+                                                <span class="wf-hint">Sen</span><span class="wf-hint">Sel</span><span
+                                                    class="wf-hint">Rab</span><span class="wf-hint">Kam</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="wf-box">
+                                        <div class="wf-head"><span class="wf-h2">Kerusakan tersering</span></div>
+                                        <table class="wf-table">
+                                            <tbody>
+                                                <tr>
+                                                    <td><span class="wf-code">K05</span> Kopling aus</td>
+                                                    <td class="r">22</td>
+                                                </tr>
+                                                <tr>
+                                                    <td><span class="wf-code">K02</span> Busi kotor</td>
+                                                    <td class="r">18</td>
+                                                </tr>
+                                                <tr>
+                                                    <td><span class="wf-code">K08</span> Kampas rem habis</td>
+                                                    <td class="r">14</td>
+                                                </tr>
+                                                <tr>
+                                                    <td><span class="wf-code">K11</span> Rantai kendor</td>
+                                                    <td class="r">9</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                                <div class="wf-cols" style="grid-template-columns:1fr 1fr">
+                                    <div class="wf-box">
+                                        <div class="wf-head"><span class="wf-h2">Kesehatan basis pengetahuan</span>
+                                        </div>
+                                        <div class="wf-body">
+                                            <div class="wf-strip">
+                                                <span class="g">18 rule aktif</span><span>2 nonaktif</span>
+                                                <span class="a">K12 belum punya rule</span><span class="a">G25 belum
+                                                    jadi premis</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="wf-box">
+                                        <div class="wf-head"><span class="wf-h2">Konsultasi terbaru</span><span
+                                                class="wf-sub">lihat semua</span></div>
+                                        <table class="wf-table">
+                                            <tbody>
+                                                <tr>
+                                                    <td><span class="wf-code">KS261113004</span></td>
+                                                    <td>K05 Kopling aus</td>
+                                                    <td class="r"><span class="wf-badge">proses</span></td>
+                                                </tr>
+                                                <tr>
+                                                    <td><span class="wf-code">KS261113003</span></td>
+                                                    <td>K02 Busi kotor</td>
+                                                    <td class="r"><span class="wf-badge f">selesai</span></td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <ul class="notes" style="margin-top:16px">
+                        <li><span class="mk">1</span><span>Sidebar admin berisi tiga grup: ringkasan, basis pengetahuan,
+                                dan operasional. Grup inilah yang membedakan pandangan admin dari guest.</span></li>
+                        <li><span class="mk">2</span><span>Empat kartu statistik dipilih agar seluruhnya muat dalam satu
+                                baris pada layar 1366 px.</span></li>
+                        <li><span class="mk">3</span><span>Grafik batang dihitung dari konsultasi per hari; tanpa
+                                library tambahan, hanya div dengan tinggi relatif.</span></li>
+                        <li><span class="mk">4</span><span>Kerusakan tersering membantu memutuskan sparepart mana yang
+                                perlu disetok lebih banyak.</span></li>
+                        <li><span class="mk">5</span><span>Panel kesehatan basis pengetahuan memberi peringatan dini:
+                                kerusakan tanpa rule atau gejala yang tidak pernah menjadi premis.</span></li>
+                        <li><span class="mk">6</span><span>Dua tombol aksi cepat mengarah ke alur yang paling sering
+                                dipakai admin di meja depan.</span></li>
+                    </ul>
+                </div>
+                <div class="titleblock">
+                    <div><span>Lembar</span><b>W-08</b></div>
+                    <div><span>Judul</span><b>Dashboard admin</b></div>
+                    <div><span>Sumber</span><code>app/views/admin/dashboard.php</code></div>
+                    <div><span>Akses</span><b>Admin</b></div>
+                </div>
+            </section>
+            <section class="sheet" id="w09" aria-labelledby="h-w09">
+                <div class="sheet-head">
+                    <h2 id="h-w09">W-09 · Rule base</h2>
+                    <p>Inti basis pengetahuan. Setiap baris dibaca sebagai kalimat IF–THEN utuh, lengkap dengan status
+                        aktif dan jumlah premis,
+                        sehingga admin tidak perlu membuka detail untuk melihat bentuk aturannya.</p>
+                </div>
+                <div class="sheet-body">
+                    <div class="wf">
+                        <div class="wf-chrome">
+                            <span class="wf-dots"><i></i><i></i><i></i></span>
+                            <span class="wf-url">akc-workshop.com/admin/rules/index.php?q=kopling</span>
+                        </div>
+                        <div class="wf-app">
+                            <aside class="wf-side">
+                                <div class="wf-logo"><i></i>AKC Workshop</div>
+                                <div class="wf-nav">Dashboard</div>
+                                <div class="wf-group">Basis pengetahuan</div>
+                                <div class="wf-nav on">Rule base</div>
+                                <div class="wf-nav">Gejala</div>
+                                <div class="wf-nav">Kerusakan &amp; servis</div>
+                                <div class="wf-nav">Sparepart</div>
+                                <div class="wf-group">Operasional</div>
+                                <div class="wf-nav">Riwayat konsultasi</div>
+                                <div class="wf-nav">Laporan PDF</div>
+                                <div class="wf-user"><i></i><span>Andi Kepala Bengkel<br><span
+                                            style="color:var(--mist)">admin</span></span></div>
+                            </aside>
+                            <div class="wf-main">
+                                <div class="wf-row between">
+                                    <div>
+                                        <div class="wf-h1">Rule base</div>
+                                        <div class="wf-sub">18 rule aktif · 2 nonaktif · 12 kerusakan tujuan</div>
+                                    </div>
+                                    <span class="wf-btn pri">Tambah rule</span>
+                                </div>
+                                <div class="wf-row">
+                                    <span class="wf-input" style="flex:1">Cari kode rule, keterangan, atau nama
+                                        kerusakan…</span>
+                                    <span class="wf-btn">Cari</span>
+                                </div>
+                                <div class="wf-box">
+                                    <table class="wf-table">
+                                        <thead>
+                                            <tr>
+                                                <th>Rule</th>
+                                                <th>IF premis</th>
+                                                <th>THEN kerusakan</th>
+                                                <th>Premis</th>
+                                                <th>Aktif</th>
+                                                <th></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td><span class="wf-code">R03</span></td>
+                                                <td class="wf-strip"><span class="g">G04</span><span
+                                                        class="g">G08</span><span class="g">G11</span><span
+                                                        class="g">G19</span></td>
+                                                <td><span class="wf-code">K05</span> Kopling aus</td>
+                                                <td>4</td>
+                                                <td><span class="wf-badge f">aktif</span></td>
+                                                <td><span class="wf-btn sm">Ubah</span> <span
+                                                        class="wf-btn sm">Hapus</span></td>
+                                            </tr>
+                                            <tr>
+                                                <td><span class="wf-code">R04</span></td>
+                                                <td class="wf-strip"><span class="g">G04</span><span
+                                                        class="g">G12</span></td>
+                                                <td><span class="wf-code">K06</span> Per kopling selip</td>
+                                                <td>2</td>
+                                                <td><span class="wf-badge f">aktif</span></td>
+                                                <td><span class="wf-btn sm">Ubah</span> <span
+                                                        class="wf-btn sm">Hapus</span></td>
+                                            </tr>
+                                            <tr>
+                                                <td><span class="wf-code">R09</span></td>
+                                                <td class="wf-strip"><span class="a">tanpa premis</span></td>
+                                                <td><span class="wf-code">K03</span> Filter udara kotor</td>
+                                                <td>0</td>
+                                                <td><span class="wf-badge c">nonaktif</span></td>
+                                                <td><span class="wf-btn sm">Ubah</span> <span
+                                                        class="wf-btn sm">Hapus</span></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                    <div class="wf-row between"
+                                        style="padding:8px 12px;border-top:1px solid var(--wf-line)">
+                                        <span class="wf-hint">3 dari 20 rule · urutan rule menentukan pertanyaan saat
+                                            kandidat seri</span>
+                                        <div class="wf-row"><span class="wf-ico">&lt;</span><span
+                                                class="wf-ico">1</span><span class="wf-ico">2</span><span
+                                                class="wf-ico">&gt;</span></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <ul class="notes" style="margin-top:16px">
+                        <li><span class="mk">1</span><span>Ringkasan di kepala halaman menyebut rule aktif, nonaktif,
+                                dan jumlah kerusakan tujuan sekaligus.</span></li>
+                        <li><span class="mk">2</span><span>Kolom IF menampilkan kode gejala sebagai chip; rantai premis
+                                merupakan representasi visual dari <code>Rule::toText()</code>.</span></li>
+                        <li><span class="mk">3</span><span>Kolom THEN menautkan ke data kerusakan sehingga admin bisa
+                                melompat ke detail servis.</span></li>
+                        <li><span class="mk">4</span><span>Rule tanpa premis ditandai garis putus-putus dan lencana
+                                nonaktif: aturan semacam ini tidak dapat dievaluasi mesin.</span></li>
+                        <li><span class="mk">5</span><span>Penghapusan memakai partial <code>delete_button</code> dengan
+                                konfirmasi dan token CSRF.</span></li>
+                    </ul>
+                </div>
+                <div class="titleblock">
+                    <div><span>Lembar</span><b>W-09</b></div>
+                    <div><span>Judul</span><b>Rule base</b></div>
+                    <div><span>Sumber</span><code>app/views/admin/rules/index.php</code></div>
+                    <div><span>Akses</span><b>Admin</b></div>
+                </div>
+            </section>
+            <section class="sheet" id="w10" aria-labelledby="h-w10">
+                <div class="sheet-head">
+                    <h2 id="h-w10">W-10 · Form rule</h2>
+                    <p>Tempat pengetahuan pakar diterjemahkan menjadi data. Pratinjau IF–THEN di kanan berubah saat
+                        premis dicentang,
+                        sehingga admin melihat kalimat akhirnya sebelum menyimpan.</p>
+                </div>
+                <div class="sheet-body">
+                    <div class="wf">
+                        <div class="wf-chrome">
+                            <span class="wf-dots"><i></i><i></i><i></i></span>
+                            <span class="wf-url">akc-workshop.com/admin/rules/form.php?id=3</span>
+                        </div>
+                        <div class="wf-app">
+                            <aside class="wf-side">
+                                <div class="wf-logo"><i></i>AKC Workshop</div>
+                                <div class="wf-nav">Dashboard</div>
+                                <div class="wf-group">Basis pengetahuan</div>
+                                <div class="wf-nav on">Rule base</div>
+                                <div class="wf-nav">Gejala</div>
+                                <div class="wf-nav">Kerusakan &amp; servis</div>
+                                <div class="wf-nav">Sparepart</div>
+                                <div class="wf-user"><i></i><span>Andi Kepala Bengkel<br><span
+                                            style="color:var(--mist)">admin</span></span></div>
+                            </aside>
+                            <div class="wf-main">
+                                <div class="wf-row between">
+                                    <div>
+                                        <div class="wf-sub">Rule base / ubah</div>
+                                        <div class="wf-h1">Rule R03</div>
+                                    </div>
+                                    <span class="wf-badge f">aktif</span>
+                                </div>
+                                <div class="wf-cols" style="grid-template-columns:1.2fr 1fr;align-items:start">
+                                    <div class="wf-box">
+                                        <div class="wf-head"><span class="wf-h2">Definisi rule</span></div>
+                                        <div class="wf-body">
+                                            <div class="wf-cols" style="grid-template-columns:1fr 1fr">
+                                                <div class="wf-field"><span>Kode</span><span class="wf-input">R03</span>
+                                                </div>
+                                                <div class="wf-field"><span>Status</span><span
+                                                        class="wf-input sel">Aktif</span></div>
+                                            </div>
+                                            <div class="wf-field"><span>Kerusakan tujuan (THEN)</span>
+                                                <span class="wf-input sel">K05 — Kopling aus</span>
+                                                <span class="wf-hint">Satu rule hanya boleh menuju satu
+                                                    kerusakan.</span>
+                                            </div>
+                                            <div class="wf-field"><span>Keterangan</span>
+                                                <span class="wf-input">Kopling mulai aus, ciri khas tarikan berat dan
+                                                    getaran stang.</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="wf-box">
+                                        <div class="wf-head"><span class="wf-h2">Premis terpilih</span><span
+                                                class="wf-badge">4 gejala</span></div>
+                                        <div class="wf-body">
+                                            <div class="wf-strip"><span class="g">G04</span><span
+                                                    class="g">G08</span><span class="g">G11</span><span
+                                                    class="g">G19</span></div>
+                                            <span class="wf-sub">Pratinjau</span>
+                                            <div class="wf-input"
+                                                style="font-family:var(--mono);font-size:11px;background:var(--flame-soft);border-color:var(--flame)">
+                                                IF G04 AND G08 AND G11 AND G19 THEN K05</div>
+                                            <span class="wf-hint">Urutan premis mengikuti urutan gejala yang
+                                                dicentang.</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="wf-box">
+                                    <div class="wf-head"><span class="wf-h2">Pilih premis dari daftar gejala</span>
+                                        <span class="wf-input" style="width:220px">Cari gejala…</span>
+                                    </div>
+                                    <div class="wf-body">
+                                        <div class="wf-cols" style="grid-template-columns:1fr 1fr">
+                                            <div class="wf-field"><span class="wf-input"
+                                                    style="display:flex;gap:8px;background:var(--flame-soft);border-color:var(--flame)">
+                                                    <b>✓</b><span class="wf-code">G04</span> Tarikan motor terasa
+                                                    berat</span></div>
+                                            <div class="wf-field"><span class="wf-input" style="display:flex;gap:8px">
+                                                    <b>&nbsp;</b><span class="wf-code">G05</span> Lampu indikator
+                                                    menyala</span></div>
+                                            <div class="wf-field"><span class="wf-input"
+                                                    style="display:flex;gap:8px;background:var(--flame-soft);border-color:var(--flame)">
+                                                    <b>✓</b><span class="wf-code">G08</span> Suara mendesing saat
+                                                    akselerasi</span></div>
+                                            <div class="wf-field"><span class="wf-input" style="display:flex;gap:8px">
+                                                    <b>&nbsp;</b><span class="wf-code">G09</span> Rem terasa
+                                                    dalam</span></div>
+                                            <div class="wf-field"><span class="wf-input"
+                                                    style="display:flex;gap:8px;background:var(--flame-soft);border-color:var(--flame)">
+                                                    <b>✓</b><span class="wf-code">G11</span> Suara kasar di tarikan
+                                                    tinggi</span></div>
+                                            <div class="wf-field"><span class="wf-input"
+                                                    style="display:flex;gap:8px;background:var(--flame-soft);border-color:var(--flame)">
+                                                    <b>✓</b><span class="wf-code">G19</span> Getaran berlebih pada
+                                                    stang</span></div>
+                                        </div>
+                                        <span class="wf-hint" style="color:#b03a2b">Minimal satu premis harus
+                                            dipilih.</span>
+                                    </div>
+                                </div>
+                                <div class="wf-row between">
+                                    <span class="wf-btn">Batal</span>
+                                    <span class="wf-btn pri">Simpan rule</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <ul class="notes" style="margin-top:16px">
+                        <li><span class="mk">1</span><span>Breadcrumb "Rule base / ubah" memberi jalan kembali tanpa
+                                perlu tombol khusus.</span></li>
+                        <li><span class="mk">2</span><span>Kode rule dibuat otomatis saat menambah
+                                (<code>Rule::nextCode('R')</code>) dan tidak diubah saat mengubah.</span></li>
+                        <li><span class="mk">3</span><span>Pratinjau IF–THEN memakai format <code>Rule::toText()</code>,
+                                sama dengan yang tampil di daftar dan laporan PDF.</span></li>
+                        <li><span class="mk">4</span><span>Daftar gejala berupa kotak centang dua kolom dengan
+                                pencarian, karena jumlah gejala bisa puluhan.</span></li>
+                        <li><span class="mk">5</span><span>Galat "minimal satu premis" diletakkan di bawah grid agar
+                                tidak terlewat saat menggulir.</span></li>
+                        <li><span class="mk">6</span><span>Saklar status memungkinkan menonaktifkan rule tanpa menghapus
+                                riwayat penggunaannya.</span></li>
+                    </ul>
+                </div>
+                <div class="titleblock">
+                    <div><span>Lembar</span><b>W-10</b></div>
+                    <div><span>Judul</span><b>Form rule</b></div>
+                    <div><span>Sumber</span><code>app/views/admin/rules/form.php</code></div>
+                    <div><span>Akses</span><b>Admin</b></div>
+                </div>
+            </section>
+            <section class="sheet" id="w11" aria-labelledby="h-w11">
+                <div class="sheet-head">
+                    <h2 id="h-w11">W-11 · Gejala</h2>
+                    <p>Gejala adalah kalimat pertanyaan yang dibaca pemilik motor, bukan istilah bengkel. Karena itu
+                        formulirnya memisahkan
+                        <em>nama singkat</em> untuk admin dan <em>teks pertanyaan</em> untuk pengguna.
+                    </p>
+                </div>
+                <div class="sheet-body">
+                    <div class="wf">
+                        <div class="wf-chrome">
+                            <span class="wf-dots"><i></i><i></i><i></i></span>
+                            <span class="wf-url">akc-workshop.com/admin/gejala/index.php?page=2</span>
+                        </div>
+                        <div class="wf-app">
+                            <aside class="wf-side">
+                                <div class="wf-logo"><i></i>AKC Workshop</div>
+                                <div class="wf-nav">Dashboard</div>
+                                <div class="wf-group">Basis pengetahuan</div>
+                                <div class="wf-nav">Rule base</div>
+                                <div class="wf-nav on">Gejala</div>
+                                <div class="wf-nav">Kerusakan &amp; servis</div>
+                                <div class="wf-nav">Sparepart</div>
+                                <div class="wf-user"><i></i><span>Andi Kepala Bengkel<br><span
+                                            style="color:var(--mist)">admin</span></span></div>
+                            </aside>
+                            <div class="wf-main">
+                                <div class="wf-row between">
+                                    <div>
+                                        <div class="wf-h1">Gejala</div>
+                                        <div class="wf-sub">26 gejala · 9 kategori · 1 belum dipakai rule</div>
+                                    </div>
+                                    <span class="wf-btn pri">Tambah gejala</span>
+                                </div>
+                                <div class="wf-row">
+                                    <span class="wf-input" style="flex:1">Cari kode atau nama gejala…</span>
+                                    <span class="wf-input sel" style="width:170px">Kategori: semua</span>
+                                    <span class="wf-btn">Cari</span>
+                                </div>
+                                <div class="wf-box">
+                                    <table class="wf-table">
+                                        <thead>
+                                            <tr>
+                                                <th>Kode</th>
+                                                <th>Nama gejala</th>
+                                                <th>Pertanyaan untuk pengguna</th>
+                                                <th>Kategori</th>
+                                                <th>Dipakai rule</th>
+                                                <th></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td><span class="wf-code">G04</span></td>
+                                                <td>Tarikan berat</td>
+                                                <td class="wf-sub">Apakah tarikan motor terasa berat saat jalan
+                                                    menanjak?</td>
+                                                <td><span class="wf-badge">Transmisi</span></td>
+                                                <td>3</td>
+                                                <td><span class="wf-btn sm">Ubah</span> <span
+                                                        class="wf-btn sm">Hapus</span></td>
+                                            </tr>
+                                            <tr>
+                                                <td><span class="wf-code">G11</span></td>
+                                                <td>Suara mesin kasar</td>
+                                                <td class="wf-sub">Apakah terdengar suara kasar saat tarikan gas dibuka?
+                                                </td>
+                                                <td><span class="wf-badge">Mesin</span></td>
+                                                <td>2</td>
+                                                <td><span class="wf-btn sm">Ubah</span> <span
+                                                        class="wf-btn sm">Hapus</span></td>
+                                            </tr>
+                                            <tr>
+                                                <td><span class="wf-code">G25</span></td>
+                                                <td>Busi berkerak</td>
+                                                <td class="wf-sub">Apakah ujung busi terlihat hitam dan berkerak saat
+                                                    dibuka?</td>
+                                                <td><span class="wf-badge">Kelistrikan</span></td>
+                                                <td><span class="wf-badge c">0</span></td>
+                                                <td><span class="wf-btn sm">Ubah</span> <span
+                                                        class="wf-btn sm">Hapus</span></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                    <div class="wf-row between"
+                                        style="padding:8px 12px;border-top:1px solid var(--wf-line)">
+                                        <span class="wf-hint">11–20 dari 26 gejala · 10 per halaman</span>
+                                        <div class="wf-row"><span class="wf-ico">&lt;</span><span
+                                                class="wf-ico">1</span><span class="wf-ico">2</span><span
+                                                class="wf-ico">3</span><span class="wf-ico">&gt;</span></div>
+                                    </div>
+                                </div>
+                                <div class="wf-box">
+                                    <div class="wf-head"><span class="wf-h2">Tambah / ubah gejala</span><span
+                                            class="wf-badge">form.php</span></div>
+                                    <div class="wf-body">
+                                        <div class="wf-cols" style="grid-template-columns:110px 1fr 170px">
+                                            <div class="wf-field"><span>Kode</span><span class="wf-input">G27</span>
+                                            </div>
+                                            <div class="wf-field"><span>Nama gejala</span><span class="wf-input">Rantai
+                                                    berdecit</span></div>
+                                            <div class="wf-field"><span>Kategori</span><span
+                                                    class="wf-input sel">Transmisi</span></div>
+                                        </div>
+                                        <div class="wf-field"><span>Pertanyaan untuk pengguna</span>
+                                            <span class="wf-input area">Apakah terdengar bunyi berdecit dari area rantai
+                                                saat motor berjalan?</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <ul class="notes" style="margin-top:16px">
+                        <li><span class="mk">1</span><span>Kepala halaman menghitung gejala yang belum dipakai rule —
+                                indikator data yang belum termanfaatkan.</span></li>
+                        <li><span class="mk">2</span><span>Kolom "Dipakai rule" berasal dari
+                                <code>Gejala::withUsage()</code>; angka nol diberi warna peringatan.</span></li>
+                        <li><span class="mk">3</span><span>Teks pertanyaan ditulis sebagai kalimat tanya lengkap karena
+                                itulah yang tampil di halaman tanya.</span></li>
+                        <li><span class="mk">4</span><span>Kategori dipakai untuk pemfilteran dan pengelompokan pada
+                                laporan PDF.</span></li>
+                        <li><span class="mk">5</span><span>Pagination memakai partial <code>pagination</code> dengan 10
+                                baris per halaman.</span></li>
+                        <li><span class="mk">6</span><span>Kode gejala dibuat otomatis
+                                (<code>Gejala::nextCode('G')</code>); admin cukup mengisi nama dan pertanyaan.</span>
+                        </li>
+                    </ul>
+                </div>
+                <div class="titleblock">
+                    <div><span>Lembar</span><b>W-11</b></div>
+                    <div><span>Judul</span><b>Gejala</b></div>
+                    <div><span>Sumber</span><code>app/views/admin/gejala/</code></div>
+                    <div><span>Akses</span><b>Admin</b></div>
+                </div>
+            </section>
+            <section class="sheet" id="w12" aria-labelledby="h-w12">
+                <div class="sheet-head">
+                    <h2 id="h-w12">W-12 · Kerusakan &amp; servis</h2>
+                    <p>Satu kerusakan menyimpan tiga hal sekaligus: penjelasan untuk pelanggan, solusi servis untuk
+                        mekanik, dan komposisi
+                        sparepart yang menentukan estimasi biaya.</p>
+                </div>
+                <div class="sheet-body">
+                    <div class="wf">
+                        <div class="wf-chrome">
+                            <span class="wf-dots"><i></i><i></i><i></i></span>
+                            <span class="wf-url">akc-workshop.com/admin/kerusakan/form.php?id=5</span>
+                        </div>
+                        <div class="wf-app">
+                            <aside class="wf-side">
+                                <div class="wf-logo"><i></i>AKC Workshop</div>
+                                <div class="wf-nav">Dashboard</div>
+                                <div class="wf-group">Basis pengetahuan</div>
+                                <div class="wf-nav">Rule base</div>
+                                <div class="wf-nav">Gejala</div>
+                                <div class="wf-nav on">Kerusakan &amp; servis</div>
+                                <div class="wf-nav">Sparepart</div>
+                                <div class="wf-user"><i></i><span>Andi Kepala Bengkel<br><span
+                                            style="color:var(--mist)">admin</span></span></div>
+                            </aside>
+                            <div class="wf-main">
+                                <div class="wf-row between">
+                                    <div>
+                                        <div class="wf-sub">Kerusakan / ubah</div>
+                                        <div class="wf-h1">K05 Kopling aus</div>
+                                    </div>
+                                    <div class="wf-row">
+                                        <span class="wf-badge f">Servis Sedang</span>
+                                        <span class="wf-badge">3 rule</span>
+                                        <span class="wf-badge">22 kasus</span>
+                                    </div>
+                                </div>
+                                <div class="wf-cols" style="grid-template-columns:1.15fr 1fr;align-items:start">
+                                    <div class="wf-box">
+                                        <div class="wf-head"><span class="wf-h2">Data kerusakan</span></div>
+                                        <div class="wf-body">
+                                            <div class="wf-cols" style="grid-template-columns:100px 1fr 170px">
+                                                <div class="wf-field"><span>Kode</span><span class="wf-input">K05</span>
+                                                </div>
+                                                <div class="wf-field"><span>Nama kerusakan</span><span
+                                                        class="wf-input">Kopling aus</span></div>
+                                                <div class="wf-field"><span>Jenis servis</span><span
+                                                        class="wf-input sel">Servis Sedang</span></div>
+                                            </div>
+                                            <div class="wf-field"><span>Deskripsi</span>
+                                                <span class="wf-input area">Kampas kopling menipis sehingga tenaga mesin
+                                                    tidak tersalurkan penuh.</span>
+                                            </div>
+                                            <div class="wf-field"><span>Solusi / tindakan servis</span>
+                                                <span class="wf-input area">Bongkar rumah kopling, ganti kampas dan per
+                                                    kopling, setel free play, lalu uji jalan.</span>
+                                            </div>
+                                            <div class="wf-field"><span>Biaya jasa</span><span
+                                                    class="wf-input">65.000</span></div>
+                                        </div>
+                                    </div>
+                                    <div class="wf-cols" style="gap:12px;align-content:start">
+                                        <div class="wf-box">
+                                            <div class="wf-head"><span class="wf-h2">Komposisi sparepart</span><span
+                                                    class="wf-btn sm">Tambah baris</span></div>
+                                            <div class="wf-body">
+                                                <div class="wf-row"><span class="wf-input sel" style="flex:1">SP04 —
+                                                        Kampas kopling</span>
+                                                    <span class="wf-input" style="width:64px">1</span><span
+                                                        class="wf-input" style="width:88px">95.000</span>
+                                                </div>
+                                                <div class="wf-row"><span class="wf-input sel" style="flex:1">SP07 — Per
+                                                        kopling</span>
+                                                    <span class="wf-input" style="width:64px">3</span><span
+                                                        class="wf-input" style="width:88px">45.000</span>
+                                                </div>
+                                                <div class="wf-row"><span class="wf-input sel" style="flex:1">SP12 — Oli
+                                                        gardan</span>
+                                                    <span class="wf-input" style="width:64px">1</span><span
+                                                        class="wf-input" style="width:88px">40.000</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="wf-box" style="border-color:var(--flame)">
+                                            <div class="wf-body"
+                                                style="grid-template-columns:1fr auto;align-items:center">
+                                                <div><span class="wf-sub">Estimasi total</span>
+                                                    <div class="wf-h2">Jasa 65.000 + sparepart 180.000</div>
+                                                </div>
+                                                <div class="wf-h1">Rp 245.000</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="wf-row between">
+                                    <span class="wf-hint">Perubahan harga sparepart hanya memengaruhi konsultasi
+                                        baru.</span>
+                                    <div class="wf-row"><span class="wf-btn">Batal</span><span class="wf-btn pri">Simpan
+                                            kerusakan</span></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <ul class="notes" style="margin-top:16px">
+                        <li><span class="mk">1</span><span>Lencana di kepala halaman menunjukkan dampak data: jumlah
+                                rule yang menuju kerusakan ini dan berapa kali terdiagnosis.</span></li>
+                        <li><span class="mk">2</span><span>Deskripsi dibaca pelanggan di halaman hasil; solusi dibaca
+                                mekanik. Keduanya dipisah agar audiensnya jelas.</span></li>
+                        <li><span class="mk">3</span><span>Estimasi total dihitung ulang setiap kali komposisi berubah,
+                                mengikuti rumus <code>Kerusakan::estimasi()</code>.</span></li>
+                        <li><span class="mk">4</span><span>Setiap baris sparepart hanya butuh pilihan, jumlah, dan
+                                harga; harga diambil dari master tetapi dapat ditampilkan untuk verifikasi.</span></li>
+                        <li><span class="mk">5</span><span>Catatan bawah menjelaskan bahwa work order lama tidak ikut
+                                berubah ketika harga diperbarui.</span></li>
+                    </ul>
+                </div>
+                <div class="titleblock">
+                    <div><span>Lembar</span><b>W-12</b></div>
+                    <div><span>Judul</span><b>Kerusakan &amp; servis</b></div>
+                    <div><span>Sumber</span><code>app/views/admin/kerusakan/</code></div>
+                    <div><span>Akses</span><b>Admin</b></div>
+                </div>
+            </section>
+            <section class="sheet" id="w13" aria-labelledby="h-w13">
+                <div class="sheet-head">
+                    <h2 id="h-w13">W-13 · Laporan PDF</h2>
+                    <p>Tujuh laporan disajikan sebagai kartu agar admin memilih jenis dulu, baru menentukan periode.
+                        Pratinjau muncul di halaman
+                        yang sama sebelum berkas diunduh.</p>
+                </div>
+                <div class="sheet-body">
+                    <div class="wf">
+                        <div class="wf-chrome">
+                            <span class="wf-dots"><i></i><i></i><i></i></span>
+                            <span class="wf-url">akc-workshop.com/admin/laporan/index.php?jenis=konsultasi</span>
+                        </div>
+                        <div class="wf-app">
+                            <aside class="wf-side">
+                                <div class="wf-logo"><i></i>AKC Workshop</div>
+                                <div class="wf-nav">Dashboard</div>
+                                <div class="wf-group">Operasional</div>
+                                <div class="wf-nav">Konsultasi baru</div>
+                                <div class="wf-nav">Riwayat konsultasi</div>
+                                <div class="wf-nav">Pengguna</div>
+                                <div class="wf-nav on">Laporan PDF</div>
+                                <div class="wf-user"><i></i><span>Andi Kepala Bengkel<br><span
+                                            style="color:var(--mist)">admin</span></span></div>
+                            </aside>
+                            <div class="wf-main">
+                                <div class="wf-row between">
+                                    <div>
+                                        <div class="wf-h1">Laporan PDF</div>
+                                        <div class="wf-sub">Tujuh jenis laporan · ukuran A4 · nomor halaman otomatis
+                                        </div>
+                                    </div>
+                                    <span class="wf-badge">Periode: 1–13 Nov 2026</span>
+                                </div>
+                                <div class="wf-cols" style="grid-template-columns:repeat(4,minmax(0,1fr))">
+                                    <div class="wf-card">
+                                        <div class="wf-h2">Ringkasan statistik</div>
+                                        <span class="wf-hint">Statistik, kerusakan tersering, tren bulanan</span>
+                                    </div>
+                                    <div class="wf-card" style="border-color:var(--flame);background:var(--flame-soft)">
+                                        <span class="wf-badge f">terpilih</span>
+                                        <div class="wf-h2">Riwayat konsultasi</div>
+                                        <span class="wf-hint">Daftar konsultasi + hasil + estimasi</span>
+                                    </div>
+                                    <div class="wf-card">
+                                        <div class="wf-h2">Basis aturan</div>
+                                        <span class="wf-hint">Seluruh rule IF–THEN dan statusnya</span>
+                                    </div>
+                                    <div class="wf-card">
+                                        <div class="wf-h2">Data gejala</div>
+                                        <span class="wf-hint">Gejala, kategori, pemakaian di rule</span>
+                                    </div>
+                                    <div class="wf-card">
+                                        <div class="wf-h2">Kerusakan &amp; sparepart</div>
+                                        <span class="wf-hint">Solusi, komponen, estimasi</span>
+                                    </div>
+                                    <div class="wf-card">
+                                        <div class="wf-h2">Data sparepart</div>
+                                        <span class="wf-hint">Harga, stok, frekuensi rekomendasi</span>
+                                    </div>
+                                    <div class="wf-card">
+                                        <div class="wf-h2">Data pengguna</div>
+                                        <span class="wf-hint">Admin dan pelanggan + jumlah konsultasi</span>
+                                    </div>
+                                    <div class="wf-card"
+                                        style="background:var(--ink);color:var(--paper);border-color:var(--ink)">
+                                        <div class="wf-h2" style="color:var(--paper)">Unduh</div>
+                                        <span class="wf-hint" style="color:var(--mist)">PDF sesuai jenis dan periode
+                                            terpilih</span>
+                                        <span class="wf-btn pri sm" style="justify-self:start">Unduh PDF</span>
+                                    </div>
+                                </div>
+                                <div class="wf-box">
+                                    <div class="wf-head"><span class="wf-h2">Pratinjau: Riwayat konsultasi</span>
+                                        <div class="wf-row">
+                                            <span class="wf-input" style="width:120px">01/11/2026</span>
+                                            <span class="wf-input" style="width:120px">13/11/2026</span>
+                                            <span class="wf-btn sm pri">Tampilkan</span>
+                                        </div>
+                                    </div>
+                                    <table class="wf-table">
+                                        <thead>
+                                            <tr>
+                                                <th>Kode</th>
+                                                <th>Tanggal</th>
+                                                <th>Pemilik</th>
+                                                <th>Hasil</th>
+                                                <th class="r">Estimasi</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td><span class="wf-code">KS261113003</span></td>
+                                                <td>13 Nov 2026</td>
+                                                <td>Budi</td>
+                                                <td>K02 Busi kotor</td>
+                                                <td class="r">85.000</td>
+                                            </tr>
+                                            <tr>
+                                                <td><span class="wf-code">KS261111042</span></td>
+                                                <td>11 Nov 2026</td>
+                                                <td>Budi</td>
+                                                <td>K05 Kopling aus</td>
+                                                <td class="r">245.000</td>
+                                            </tr>
+                                            <tr>
+                                                <td><span class="wf-code">KS261109017</span></td>
+                                                <td>9 Nov 2026</td>
+                                                <td>Sari</td>
+                                                <td class="wf-sub">tidak ada kerusakan terbukti</td>
+                                                <td class="r">—</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                    <div class="wf-row between"
+                                        style="padding:8px 12px;border-top:1px solid var(--wf-line)">
+                                        <span class="wf-hint">128 baris · 96 selesai · total estimasi Rp
+                                            18.450.000</span>
+                                        <span class="wf-hint">laporan-konsultasi-2026-11-01_2026-11-13.pdf</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <ul class="notes" style="margin-top:16px">
+                        <li><span class="mk">1</span><span>Tujuh kartu sesuai katalog <code>Laporan::JENIS</code>; kartu
+                                yang dipilih diberi latar oranye muda dan lencana.</span></li>
+                        <li><span class="mk">2</span><span>Kartu kedelapan berwarna gelap khusus untuk aksi unduh,
+                                sehingga tidak tertukar dengan pilihan jenis laporan.</span></li>
+                        <li><span class="mk">3</span><span>Rentang tanggal hanya berpengaruh pada laporan ringkasan dan
+                                konsultasi; laporan master selalu memuat seluruh data.</span></li>
+                        <li><span class="mk">4</span><span>Pratinjau memakai tabel yang sama dengan isi PDF, hanya
+                                orientasinya menyesuaikan layar.</span></li>
+                        <li><span class="mk">5</span><span>Nama berkas ditampilkan sebelum diunduh agar admin tahu apa
+                                yang akan tersimpan di folder arsip.</span></li>
+                        <li><span class="mk">6</span><span>Baris tanpa hasil tetap muncul dengan keterangan; laporan
+                                tidak boleh tampak seolah datanya hilang.</span></li>
+                    </ul>
+                </div>
+                <div class="titleblock">
+                    <div><span>Lembar</span><b>W-13</b></div>
+                    <div><span>Judul</span><b>Laporan PDF</b></div>
+                    <div><span>Sumber</span><code>app/views/admin/laporan/index.php</code></div>
+                    <div><span>Akses</span><b>Admin</b></div>
+                </div>
+            </section>
+            <section class="sheet" id="w14" aria-labelledby="h-w14">
+                <div class="sheet-head">
+                    <h2 id="h-w14">W-14 · Pengguna</h2>
+                    <p>Admin membuat akun pelanggan di meja bengkel dan menetapkan role. Kolom jumlah konsultasi
+                        membantu memutuskan
+                        apakah sebuah akun masih dipakai sebelum dihapus.</p>
+                </div>
+                <div class="sheet-body">
+                    <div class="wf">
+                        <div class="wf-chrome">
+                            <span class="wf-dots"><i></i><i></i><i></i></span>
+                            <span class="wf-url">akc-workshop.com/admin/users/form.php?id=7</span>
+                        </div>
+                        <div class="wf-app">
+                            <aside class="wf-side">
+                                <div class="wf-logo"><i></i>AKC Workshop</div>
+                                <div class="wf-nav">Dashboard</div>
+                                <div class="wf-group">Operasional</div>
+                                <div class="wf-nav">Konsultasi baru</div>
+                                <div class="wf-nav">Riwayat konsultasi</div>
+                                <div class="wf-nav on">Pengguna</div>
+                                <div class="wf-nav">Laporan PDF</div>
+                                <div class="wf-user"><i></i><span>Andi Kepala Bengkel<br><span
+                                            style="color:var(--mist)">admin</span></span></div>
+                            </aside>
+                            <div class="wf-main">
+                                <div class="wf-row between">
+                                    <div>
+                                        <div class="wf-sub">Pengguna / ubah</div>
+                                        <div class="wf-h1">Budi Santoso</div>
+                                    </div>
+                                    <div class="wf-row"><span class="wf-badge">guest</span><span
+                                            class="wf-badge f">aktif</span>
+                                        <span class="wf-badge">6 konsultasi</span>
+                                    </div>
+                                </div>
+                                <div class="wf-cols" style="grid-template-columns:1fr 1fr;align-items:start">
+                                    <div class="wf-box">
+                                        <div class="wf-head"><span class="wf-h2">Data akun</span></div>
+                                        <div class="wf-body">
+                                            <div class="wf-field"><span>Nama lengkap</span><span class="wf-input">Budi
+                                                    Santoso</span></div>
+                                            <div class="wf-cols" style="grid-template-columns:1fr 1fr">
+                                                <div class="wf-field"><span>Username</span><span
+                                                        class="wf-input">budi.akc</span></div>
+                                                <div class="wf-field"><span>Nomor HP</span><span class="wf-input">0812
+                                                        3456 7890</span></div>
+                                            </div>
+                                            <div class="wf-field"><span>Email</span><span
+                                                    class="wf-input">budi@example.com</span></div>
+                                            <div class="wf-cols" style="grid-template-columns:1fr 1fr">
+                                                <div class="wf-field"><span>Password baru</span><span
+                                                        class="wf-input">••••••••</span>
+                                                    <span class="wf-hint">Kosongkan bila tidak diubah.</span>
+                                                </div>
+                                                <div class="wf-field"><span>Role</span><span
+                                                        class="wf-input sel">Guest</span></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="wf-cols" style="gap:12px;align-content:start">
+                                        <div class="wf-box">
+                                            <div class="wf-head"><span class="wf-h2">Aktivitas</span></div>
+                                            <div class="wf-body">
+                                                <div class="wf-row between"><span class="wf-sub">Terakhir
+                                                        login</span><span>12 Nov 2026, 19:04</span></div>
+                                                <div class="wf-row between"><span class="wf-sub">Akun
+                                                        dibuat</span><span>2 Jan 2026</span></div>
+                                                <div class="wf-row between"><span class="wf-sub">Konsultasi
+                                                        selesai</span><span>4</span></div>
+                                                <div class="wf-row between"><span class="wf-sub">Masih
+                                                        proses</span><span>2</span></div>
+                                                <span class="wf-hint">Riwayat konsultasi akun ini tetap tersimpan walau
+                                                    akun dihapus.</span>
+                                            </div>
+                                        </div>
+                                        <div class="wf-box" style="border-color:var(--coral)">
+                                            <div class="wf-body">
+                                                <span class="wf-h2" style="color:#b03a2b">Hapus akun</span>
+                                                <span class="wf-hint">Akun hilang dari daftar pengguna; konsultasinya
+                                                    menjadi anonim.</span>
+                                                <span class="wf-btn sm"
+                                                    style="border-color:var(--coral);color:#b03a2b;justify-self:start">Hapus
+                                                    pengguna</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="wf-row between">
+                                    <span class="wf-hint">Role admin membuka seluruh menu administrasi pada login
+                                        berikutnya.</span>
+                                    <div class="wf-row"><span class="wf-btn">Batal</span><span class="wf-btn pri">Simpan
+                                            pengguna</span></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <ul class="notes" style="margin-top:16px">
+                        <li><span class="mk">1</span><span>Lencana kepala halaman memberi konteks: role, status akun,
+                                dan jumlah konsultasi yang dimiliki.</span></li>
+                        <li><span class="mk">2</span><span>Password wajib pada mode tambah dan opsional pada mode ubah;
+                                nilainya tidak pernah dikirim balik ke formulir.</span></li>
+                        <li><span class="mk">3</span><span>Pilihan role hanya dua (admin/guest) sesuai <code>ENUM</code>
+                                pada tabel <code>users</code>.</span></li>
+                        <li><span class="mk">4</span><span>Panel aktivitas membantu admin memverifikasi akun pelanggan
+                                lewat nomor HP bila ada keluhan.</span></li>
+                        <li><span class="mk">5</span><span>Zona hapus dipisahkan dengan garis coral dan konfirmasi,
+                                karena relasi <code>user_id</code> memakai <code>ON DELETE SET NULL</code>.</span></li>
+                        <li><span class="mk">6</span><span>Admin tidak dapat menurunkan role akunnya sendiri sehingga
+                                selalu ada minimal satu admin.</span></li>
+                    </ul>
+                </div>
+                <div class="titleblock">
+                    <div><span>Lembar</span><b>W-14</b></div>
+                    <div><span>Judul</span><b>Pengguna</b></div>
+                    <div><span>Sumber</span><code>app/views/admin/users/</code></div>
+                    <div><span>Akses</span><b>Admin</b></div>
+                </div>
+            </section>
+        </main>
+    </div>
+    <script src="assets/uml.js"></script>
+</body>
+
+</html>

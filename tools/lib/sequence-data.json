@@ -1,0 +1,892 @@
+[
+  {
+    "id": "s01",
+    "slug": "s01",
+    "title": "Masuk ke akun",
+    "caption": "Satu halaman masuk digunakan admin dan pelanggan. Isian dapat berupa nama pengguna atau email.",
+    "participants": [
+      {
+        "id": "u",
+        "kind": "actor",
+        "label": "Pengunjung"
+      },
+      {
+        "id": "l",
+        "kind": "object",
+        "label": "Halaman masuk"
+      },
+      {
+        "id": "v",
+        "kind": "object",
+        "label": "Pemeriksa isian"
+      },
+      {
+        "id": "a",
+        "kind": "object",
+        "label": "Pengelola akun"
+      },
+      {
+        "id": "d",
+        "kind": "data",
+        "label": "Penyimpanan data"
+      }
+    ],
+    "messages": [
+      {
+        "from": "u",
+        "to": "l",
+        "label": "Membuka halaman masuk",
+        "condition": ""
+      },
+      {
+        "from": "l",
+        "to": "a",
+        "label": "Memastikan pengunjung belum masuk",
+        "condition": ""
+      },
+      {
+        "from": "a",
+        "to": "u",
+        "label": "Dialihkan ke beranda",
+        "condition": "",
+        "ret": true
+      },
+      {
+        "from": "l",
+        "to": "u",
+        "label": "Menampilkan formulir masuk",
+        "condition": "Jika belum masuk",
+        "ret": true
+      },
+      {
+        "from": "u",
+        "to": "l",
+        "label": "Mengirim nama pengguna atau email dan kata sandi",
+        "condition": "Jika belum masuk"
+      },
+      {
+        "from": "l",
+        "to": "v",
+        "label": "Memeriksa kelengkapan isian",
+        "condition": "Jika belum masuk"
+      },
+      {
+        "from": "v",
+        "to": "l",
+        "label": "Isian lengkap atau ada yang salah",
+        "condition": "Jika belum masuk",
+        "ret": true
+      },
+      {
+        "from": "l",
+        "to": "u",
+        "label": "Tampilkan kembali isian dan bagian yang perlu diperbaiki",
+        "condition": "Jika belum masuk",
+        "ret": true
+      },
+      {
+        "from": "l",
+        "to": "a",
+        "label": "Mencocokkan data akun",
+        "condition": "Jika belum masuk dan Jika isian lengkap"
+      },
+      {
+        "from": "a",
+        "to": "d",
+        "label": "Mencari akun dengan nama pengguna atau email tersebut",
+        "condition": "Jika belum masuk dan Jika isian lengkap"
+      },
+      {
+        "from": "d",
+        "to": "a",
+        "label": "Kirim data akun atau kabar bahwa akun tidak ditemukan",
+        "condition": "Jika belum masuk dan Jika isian lengkap",
+        "ret": true
+      },
+      {
+        "from": "a",
+        "to": "l",
+        "label": "Gagal masuk",
+        "condition": "Jika belum masuk dan Jika isian lengkap",
+        "ret": true
+      },
+      {
+        "from": "l",
+        "to": "u",
+        "label": "Pesan umum, tanpa menunjuk isian mana",
+        "condition": "Jika belum masuk dan Jika isian lengkap",
+        "ret": true
+      },
+      {
+        "from": "a",
+        "to": "l",
+        "label": "Berhasil masuk",
+        "condition": "Jika belum masuk dan Jika isian lengkap dan Jika data cocok",
+        "ret": true
+      },
+      {
+        "from": "l",
+        "to": "a",
+        "label": "Menandai pengguna sudah masuk",
+        "condition": "Jika belum masuk dan Jika isian lengkap dan Jika data cocok"
+      },
+      {
+        "from": "l",
+        "to": "d",
+        "label": "Mencatat waktu masuk terakhir",
+        "condition": "Jika belum masuk dan Jika isian lengkap dan Jika data cocok"
+      },
+      {
+        "from": "l",
+        "to": "u",
+        "label": "Dialihkan ke beranda sesuai peran",
+        "condition": "Jika belum masuk dan Jika isian lengkap dan Jika data cocok",
+        "ret": true
+      },
+      {
+        "from": "a",
+        "to": "l",
+        "label": "Masuk ditolak karena akun sedang dinonaktifkan",
+        "condition": "Jika akun sedang dinonaktifkan",
+        "ret": true
+      },
+      {
+        "from": "l",
+        "to": "u",
+        "label": "Penjelasan bahwa akun sedang tidak aktif",
+        "condition": "Jika akun sedang dinonaktifkan",
+        "ret": true
+      }
+    ]
+  },
+  {
+    "id": "s02",
+    "slug": "s02",
+    "title": "Membuat akun pelanggan",
+    "caption": "Pendaftaran mandiri membuat akun pelanggan. Setelah akun dibuat, konsultasi pertama langsung dapat dimulai.",
+    "participants": [
+      {
+        "id": "u",
+        "kind": "actor",
+        "label": "Pengunjung"
+      },
+      {
+        "id": "r",
+        "kind": "object",
+        "label": "Halaman daftar"
+      },
+      {
+        "id": "v",
+        "kind": "object",
+        "label": "Pemeriksa isian"
+      },
+      {
+        "id": "m",
+        "kind": "object",
+        "label": "Pengelola akun"
+      },
+      {
+        "id": "d",
+        "kind": "data",
+        "label": "Penyimpanan data"
+      }
+    ],
+    "messages": [
+      {
+        "from": "u",
+        "to": "r",
+        "label": "Membuka halaman pendaftaran",
+        "condition": ""
+      },
+      {
+        "from": "r",
+        "to": "u",
+        "label": "Menampilkan formulir pendaftaran",
+        "condition": "",
+        "ret": true
+      },
+      {
+        "from": "u",
+        "to": "r",
+        "label": "Mengirim nama, nama pengguna, email, nomor telepon, dan kata sandi yang diulang",
+        "condition": ""
+      },
+      {
+        "from": "r",
+        "to": "v",
+        "label": "Memeriksa kelengkapan isian serta pilihan nama pengguna dan email",
+        "condition": ""
+      },
+      {
+        "from": "v",
+        "to": "d",
+        "label": "Memastikan nama pengguna dan email belum pernah digunakan",
+        "condition": ""
+      },
+      {
+        "from": "d",
+        "to": "v",
+        "label": "Hasil pemeriksaan",
+        "condition": "",
+        "ret": true
+      },
+      {
+        "from": "v",
+        "to": "r",
+        "label": "Daftar kesalahan isian",
+        "condition": "",
+        "ret": true
+      },
+      {
+        "from": "r",
+        "to": "u",
+        "label": "Tampilkan kembali isian dan bagian yang perlu diperbaiki",
+        "condition": "",
+        "ret": true
+      },
+      {
+        "from": "r",
+        "to": "m",
+        "label": "Menyiapkan akun baru",
+        "condition": "Jika isian sudah benar"
+      },
+      {
+        "from": "m",
+        "to": "d",
+        "label": "Menyimpan akun dengan peran pengguna biasa",
+        "condition": "Jika isian sudah benar"
+      },
+      {
+        "from": "d",
+        "to": "m",
+        "label": "Akun tersimpan",
+        "condition": "Jika isian sudah benar",
+        "ret": true
+      },
+      {
+        "from": "m",
+        "to": "r",
+        "label": "Akun siap dipakai",
+        "condition": "Jika isian sudah benar",
+        "ret": true
+      },
+      {
+        "from": "r",
+        "to": "u",
+        "label": "Akun dibuat dan halaman konsultasi pertama dibuka",
+        "condition": "Jika isian sudah benar",
+        "ret": true
+      },
+      {
+        "from": "r",
+        "to": "u",
+        "label": "Penjelasan bahwa pendaftaran sedang ditutup; minta bantuan admin untuk membuat akun",
+        "condition": "Jika pendaftaran sedang ditutup",
+        "ret": true
+      }
+    ]
+  },
+  {
+    "id": "s03",
+    "slug": "s03",
+    "title": "Mulai konsultasi",
+    "caption": "Konsultasi dapat dimulai jika isian utama diterima dan sudah ada aturan aktif.",
+    "participants": [
+      {
+        "id": "u",
+        "kind": "actor",
+        "label": "Pengunjung"
+      },
+      {
+        "id": "c",
+        "kind": "object",
+        "label": "Formulir konsultasi"
+      },
+      {
+        "id": "s",
+        "kind": "object",
+        "label": "Pengelola konsultasi"
+      },
+      {
+        "id": "d",
+        "kind": "data",
+        "label": "Penyimpanan data"
+      }
+    ],
+    "messages": [
+      {
+        "from": "u",
+        "to": "c",
+        "label": "Mengisi data motor lalu mengirim",
+        "condition": ""
+      },
+      {
+        "from": "c",
+        "to": "d",
+        "label": "Memastikan ada aturan aktif",
+        "condition": ""
+      },
+      {
+        "from": "d",
+        "to": "c",
+        "label": "Jumlah aturan aktif",
+        "condition": "",
+        "ret": true
+      },
+      {
+        "from": "c",
+        "to": "u",
+        "label": "Penjelasan bahwa belum ada aturan aktif",
+        "condition": "",
+        "ret": true
+      },
+      {
+        "from": "c",
+        "to": "s",
+        "label": "Memulai konsultasi baru",
+        "condition": "Jika aturan tersedia"
+      },
+      {
+        "from": "s",
+        "to": "d",
+        "label": "Membuat nomor konsultasi",
+        "condition": "Jika aturan tersedia"
+      },
+      {
+        "from": "d",
+        "to": "s",
+        "label": "Nomor konsultasi",
+        "condition": "Jika aturan tersedia",
+        "ret": true
+      },
+      {
+        "from": "s",
+        "to": "d",
+        "label": "Menyimpan konsultasi berstatus berjalan",
+        "condition": "Jika aturan tersedia"
+      },
+      {
+        "from": "d",
+        "to": "s",
+        "label": "Tersimpan",
+        "condition": "Jika aturan tersedia",
+        "ret": true
+      },
+      {
+        "from": "s",
+        "to": "c",
+        "label": "Konsultasi siap",
+        "condition": "Jika aturan tersedia",
+        "ret": true
+      },
+      {
+        "from": "c",
+        "to": "u",
+        "label": "Membuka pertanyaan pertama",
+        "condition": "Jika aturan tersedia",
+        "ret": true
+      }
+    ]
+  },
+  {
+    "id": "s04",
+    "slug": "s04",
+    "title": "Jawab pertanyaan & pemeriksaan kecocokan",
+    "caption": "Setiap jawaban diperiksa kembali. Jawaban lama dapat diubah, dan konsultasi yang belum selesai dapat dibatalkan.",
+    "participants": [
+      {
+        "id": "u",
+        "kind": "actor",
+        "label": "Pengunjung"
+      },
+      {
+        "id": "t",
+        "kind": "object",
+        "label": "Halaman pertanyaan"
+      },
+      {
+        "id": "s",
+        "kind": "object",
+        "label": "Pengelola konsultasi"
+      },
+      {
+        "id": "e",
+        "kind": "object",
+        "label": "Pemeriksa kecocokan"
+      },
+      {
+        "id": "d",
+        "kind": "data",
+        "label": "Penyimpanan data"
+      }
+    ],
+    "messages": [
+      {
+        "from": "u",
+        "to": "t",
+        "label": "Membuka halaman pertanyaan",
+        "condition": ""
+      },
+      {
+        "from": "t",
+        "to": "s",
+        "label": "Memastikan konsultasi milik pengguna",
+        "condition": ""
+      },
+      {
+        "from": "s",
+        "to": "u",
+        "label": "Permintaan ditolak, kembali ke halaman sebelumnya",
+        "condition": "",
+        "ret": true
+      },
+      {
+        "from": "s",
+        "to": "e",
+        "label": "Menilai ulang seluruh jawaban",
+        "condition": "Jika miliknya"
+      },
+      {
+        "from": "e",
+        "to": "s",
+        "label": "Pertanyaan saat ini dan kemajuan pemeriksaan",
+        "condition": "Jika miliknya",
+        "ret": true
+      },
+      {
+        "from": "s",
+        "to": "t",
+        "label": "Pertanyaan aktif",
+        "condition": "Jika miliknya",
+        "ret": true
+      },
+      {
+        "from": "t",
+        "to": "u",
+        "label": "Menampilkan pertanyaan dan tombol Ya atau Tidak",
+        "condition": "Jika miliknya",
+        "ret": true
+      },
+      {
+        "from": "u",
+        "to": "t",
+        "label": "Menjawab pertanyaan",
+        "condition": "Jika miliknya"
+      },
+      {
+        "from": "t",
+        "to": "s",
+        "label": "Meneruskan jawaban",
+        "condition": "Jika miliknya"
+      },
+      {
+        "from": "s",
+        "to": "d",
+        "label": "Menyimpan jawaban",
+        "condition": "Jika miliknya"
+      },
+      {
+        "from": "s",
+        "to": "e",
+        "label": "Menilai ulang",
+        "condition": "Jika miliknya"
+      },
+      {
+        "from": "e",
+        "to": "s",
+        "label": "Pertanyaan berikutnya",
+        "condition": "Jika miliknya",
+        "ret": true
+      },
+      {
+        "from": "s",
+        "to": "u",
+        "label": "Pertanyaan berikutnya",
+        "condition": "Jika miliknya",
+        "ret": true
+      },
+      {
+        "from": "e",
+        "to": "s",
+        "label": "Gangguan yang cocok atau belum ada yang cocok",
+        "condition": "Jika miliknya dan Jika pemeriksaan selesai",
+        "ret": true
+      },
+      {
+        "from": "s",
+        "to": "d",
+        "label": "Menyimpan hasil dan urutan pemeriksaan",
+        "condition": "Jika miliknya dan Jika pemeriksaan selesai"
+      },
+      {
+        "from": "s",
+        "to": "u",
+        "label": "Membuka halaman hasil pemeriksaan",
+        "condition": "Jika miliknya dan Jika pemeriksaan selesai",
+        "ret": true
+      },
+      {
+        "from": "u",
+        "to": "t",
+        "label": "Menekan Ubah jawaban sebelumnya",
+        "condition": "Jika jawaban sebelumnya ingin diubah"
+      },
+      {
+        "from": "t",
+        "to": "s",
+        "label": "Meminta jawaban terakhir dibuka kembali",
+        "condition": "Jika konsultasi dibatalkan sebelum selesai"
+      },
+      {
+        "from": "s",
+        "to": "d",
+        "label": "Menghapus jawaban terakhir",
+        "condition": "Jika konsultasi dibatalkan sebelum selesai"
+      },
+      {
+        "from": "d",
+        "to": "t",
+        "label": "Pertanyaan sebelumnya siap dijawab kembali",
+        "condition": "Jika konsultasi dibatalkan sebelum selesai",
+        "ret": true
+      },
+      {
+        "from": "u",
+        "to": "t",
+        "label": "Menyetujui pembatalan konsultasi",
+        "condition": "Jika konsultasi dibatalkan sebelum selesai"
+      },
+      {
+        "from": "t",
+        "to": "d",
+        "label": "Menghapus konsultasi yang belum selesai",
+        "condition": "Jika konsultasi dibatalkan sebelum selesai"
+      },
+      {
+        "from": "t",
+        "to": "u",
+        "label": "Kembali ke halaman konsultasi baru",
+        "condition": "Jika konsultasi dibatalkan sebelum selesai",
+        "ret": true
+      }
+    ]
+  },
+  {
+    "id": "s05",
+    "slug": "s05",
+    "title": "Lihat hasil pemeriksaan",
+    "caption": "Pengguna hanya dapat membuka konsultasinya sendiri. Bila belum ada gangguan yang cocok, pemeriksaan langsung di bengkel dianjurkan.",
+    "participants": [
+      {
+        "id": "u",
+        "kind": "actor",
+        "label": "Pengguna"
+      },
+      {
+        "id": "h",
+        "kind": "object",
+        "label": "Halaman hasil"
+      },
+      {
+        "id": "s",
+        "kind": "object",
+        "label": "Pengelola konsultasi"
+      },
+      {
+        "id": "d",
+        "kind": "data",
+        "label": "Penyimpanan data"
+      }
+    ],
+    "messages": [
+      {
+        "from": "u",
+        "to": "h",
+        "label": "Membuka halaman hasil",
+        "condition": ""
+      },
+      {
+        "from": "h",
+        "to": "s",
+        "label": "Memeriksa hak membuka konsultasi",
+        "condition": ""
+      },
+      {
+        "from": "s",
+        "to": "u",
+        "label": "Halaman tidak ditemukan atau akses ditolak",
+        "condition": "",
+        "ret": true
+      },
+      {
+        "from": "s",
+        "to": "d",
+        "label": "Mengambil data motor, hasil, dan urutan pemeriksaan",
+        "condition": "Jika berhak"
+      },
+      {
+        "from": "d",
+        "to": "s",
+        "label": "Data lengkap",
+        "condition": "Jika berhak",
+        "ret": true
+      },
+      {
+        "from": "s",
+        "to": "h",
+        "label": "Data konsultasi",
+        "condition": "Jika berhak",
+        "ret": true
+      },
+      {
+        "from": "h",
+        "to": "u",
+        "label": "Gejala belum cocok, sarankan periksa langsung",
+        "condition": "Jika berhak",
+        "ret": true
+      },
+      {
+        "from": "h",
+        "to": "u",
+        "label": "Gangguan, suku cadang, perkiraan biaya, dan urutan pemeriksaan",
+        "condition": "Jika berhak dan Jika gangguan yang cocok",
+        "ret": true
+      },
+      {
+        "from": "h",
+        "to": "u",
+        "label": "Membuka kembali pertanyaan berikutnya",
+        "condition": "Jika konsultasi belum selesai",
+        "ret": true
+      }
+    ]
+  },
+  {
+    "id": "s06",
+    "slug": "s06",
+    "title": "Mengunduh perintah kerja",
+    "caption": "Perintah kerja disiapkan setelah pemilik konsultasi dan penyelesaian pemeriksaan dipastikan.",
+    "participants": [
+      {
+        "id": "u",
+        "kind": "actor",
+        "label": "Pengguna"
+      },
+      {
+        "id": "p",
+        "kind": "object",
+        "label": "Halaman unduhan"
+      },
+      {
+        "id": "s",
+        "kind": "object",
+        "label": "Pengelola konsultasi"
+      },
+      {
+        "id": "x",
+        "kind": "object",
+        "label": "Pembuat berkas"
+      },
+      {
+        "id": "d",
+        "kind": "data",
+        "label": "Penyimpanan data"
+      }
+    ],
+    "messages": [
+      {
+        "from": "u",
+        "to": "p",
+        "label": "Menekan tombol unduh perintah kerja",
+        "condition": ""
+      },
+      {
+        "from": "p",
+        "to": "s",
+        "label": "Memeriksa izin pengguna",
+        "condition": ""
+      },
+      {
+        "from": "s",
+        "to": "u",
+        "label": "Permintaan ditolak",
+        "condition": "",
+        "ret": true
+      },
+      {
+        "from": "s",
+        "to": "d",
+        "label": "Mengambil data konsultasi dan hasil",
+        "condition": "Jika berhak"
+      },
+      {
+        "from": "d",
+        "to": "s",
+        "label": "Data konsultasi",
+        "condition": "Jika berhak",
+        "ret": true
+      },
+      {
+        "from": "s",
+        "to": "u",
+        "label": "Pemberitahuan perintah kerja belum bisa dibuat",
+        "condition": "Jika berhak",
+        "ret": true
+      },
+      {
+        "from": "s",
+        "to": "p",
+        "label": "Data siap dibuat menjadi perintah kerja",
+        "condition": "Jika berhak dan Jika hasil tersedia",
+        "ret": true
+      },
+      {
+        "from": "p",
+        "to": "x",
+        "label": "Menyusun halaman perintah kerja A4 tegak",
+        "condition": "Jika berhak dan Jika hasil tersedia"
+      },
+      {
+        "from": "x",
+        "to": "p",
+        "label": "Berkas siap cetak dengan nomor halaman",
+        "condition": "Jika berhak dan Jika hasil tersedia",
+        "ret": true
+      },
+      {
+        "from": "p",
+        "to": "u",
+        "label": "Berkas perintah kerja terunduh",
+        "condition": "Jika berhak dan Jika hasil tersedia",
+        "ret": true
+      },
+      {
+        "from": "p",
+        "to": "u",
+        "label": "Penjelasan bahwa konsultasi harus diselesaikan terlebih dahulu",
+        "condition": "Jika konsultasi belum selesai",
+        "ret": true
+      }
+    ]
+  },
+  {
+    "id": "s07",
+    "slug": "s07",
+    "title": "Mengunduh laporan admin",
+    "caption": "Admin memilih jenis laporan dan rentang tanggal. Rentang yang tidak wajar diganti dengan pilihan yang sudah disediakan.",
+    "participants": [
+      {
+        "id": "u",
+        "kind": "actor",
+        "label": "Admin"
+      },
+      {
+        "id": "l",
+        "kind": "object",
+        "label": "Menu laporan"
+      },
+      {
+        "id": "r",
+        "kind": "object",
+        "label": "Penyusun laporan"
+      },
+      {
+        "id": "x",
+        "kind": "object",
+        "label": "Pembuat berkas"
+      },
+      {
+        "id": "d",
+        "kind": "data",
+        "label": "Penyimpanan data"
+      }
+    ],
+    "messages": [
+      {
+        "from": "u",
+        "to": "l",
+        "label": "Membuka menu laporan",
+        "condition": ""
+      },
+      {
+        "from": "l",
+        "to": "u",
+        "label": "Tujuh pilihan jenis laporan",
+        "condition": "",
+        "ret": true
+      },
+      {
+        "from": "u",
+        "to": "l",
+        "label": "Memilih jenis dan rentang tanggal",
+        "condition": ""
+      },
+      {
+        "from": "l",
+        "to": "r",
+        "label": "Menyiapkan data laporan",
+        "condition": ""
+      },
+      {
+        "from": "r",
+        "to": "d",
+        "label": "Mengambil data sesuai jenis laporan",
+        "condition": ""
+      },
+      {
+        "from": "d",
+        "to": "r",
+        "label": "Data laporan",
+        "condition": "",
+        "ret": true
+      },
+      {
+        "from": "r",
+        "to": "l",
+        "label": "Gunakan tanggal awal dan akhir yang sudah disediakan",
+        "condition": "",
+        "ret": true
+      },
+      {
+        "from": "r",
+        "to": "l",
+        "label": "Memakai rentang pilihan admin",
+        "condition": "Jika rentang wajar",
+        "ret": true
+      },
+      {
+        "from": "l",
+        "to": "u",
+        "label": "Ringkasan dan pratinjau tabel",
+        "condition": "",
+        "ret": true
+      },
+      {
+        "from": "u",
+        "to": "l",
+        "label": "Meminta berkas laporan",
+        "condition": ""
+      },
+      {
+        "from": "l",
+        "to": "x",
+        "label": "Menyusun berkas sesuai jenis laporan",
+        "condition": ""
+      },
+      {
+        "from": "x",
+        "to": "u",
+        "label": "Berkas laporan terunduh",
+        "condition": "",
+        "ret": true
+      },
+      {
+        "from": "s",
+        "to": "c",
+        "label": "Penjelasan bahwa jenis laporan tidak dikenali",
+        "condition": "Jika jenis laporan tidak tersedia",
+        "ret": true
+      }
+    ]
+  }
+]

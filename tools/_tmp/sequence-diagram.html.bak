@@ -1,0 +1,618 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sequence diagram · AKC Workshop</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600&family=Barlow+Condensed:wght@500;600;700&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/uml.css">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%230f0e17'/><path d='M8 22 16 8l8 14' stroke='%23ff8906' stroke-width='3.5' fill='none' stroke-linejoin='round'/></svg>">
+</head>
+<body>
+<header class="top">
+    <a class="brand" href="index.html"><svg viewBox="0 0 32 32" width="26" height="26" aria-hidden="true"><rect width="32" height="32" rx="6" fill="#ff8906"/><path d="M8 22 16 8l8 14" stroke="#0f0e17" stroke-width="3.5" fill="none" stroke-linejoin="round"/></svg> AKC Workshop <small>dokumen perancangan</small></a>
+    <nav aria-label="Dokumen">
+        <a href="index.html">Daftar isi</a>
+        <a href="usecase-diagram.html">Use case</a>
+        <a href="class-diagram.html">Class</a>
+        <a href="activity-diagram.html">Activity</a>
+        <a href="sequence-diagram.html" aria-current="page">Sequence</a>
+        <a href="rancangan-layar.html">Rancangan layar</a>
+    </nav>
+</header>
+
+<div class="page">
+    <div class="page-intro">
+        <h1>Sequence diagram</h1>
+        <p>Interaksi antar bagian untuk tujuh skenario utama. Pengguna digambarkan sebagai tokoh, halaman layar sebagai
+           kotak penerima perintah, pengelola data sebagai bagian di dalam sistem, serta penyimpanan data dan pencetak
+           berkas sebagai bagian luar. Nomor urut menunjukkan urutan pesan.</p>
+    </div>
+
+    <nav class="toc" aria-label="Isi halaman">
+        <p>Isi</p>
+        <ol>
+            <li><a href="#s01"><span>S-01</span>Login</a></li>
+            <li><a href="#s02"><span>S-02</span>Registrasi akun</a></li>
+            <li><a href="#s03"><span>S-03</span>Mulai konsultasi</a></li>
+            <li><a href="#s04"><span>S-04</span>Jawab pertanyaan &amp; inferensi</a></li>
+            <li><a href="#s05"><span>S-05</span>Lihat hasil diagnosa</a></li>
+            <li><a href="#s06"><span>S-06</span>Unduh work order PDF</a></li>
+            <li><a href="#s07"><span>S-07</span>Laporan PDF admin</a></li>
+        </ol>
+    </nav>
+
+    <main>
+        <section class="sheet" id="s01" aria-labelledby="h-s01">
+            <div class="sheet-head">
+                <h2 id="h-s01">S-01 · Login</h2>
+                <p>Satu halaman untuk semua peran. Pesan galat sengaja tidak membedakan email tidak dikenal dan password salah.</p>
+            </div>
+            <figure class="drawing" data-puml>
+<pre class="puml">
+skinparam defaultFontName "Segoe UI"
+skinparam defaultFontSize 13
+skinparam ArrowColor #0F0E17
+skinparam ArrowThickness 1.2
+skinparam LifeLineBorderColor #A7A9BE
+skinparam SequenceGroupBorderColor #0F0E17
+skinparam SequenceGroupBackgroundColor #FFF1E0
+skinparam SequenceGroupBodyBackgroundColor #FFFFFE
+skinparam SequenceGroupFontStyle bold
+skinparam SequenceBoxBorderColor #0F0E17
+skinparam ActorBorderColor #0F0E17
+skinparam ActorBackgroundColor #FFFFFE
+skinparam ParticipantBorderColor #0F0E17
+skinparam ParticipantBackgroundColor #FFFFFE
+skinparam NoteBorderColor #FF8906
+skinparam NoteBackgroundColor #FFF1E0
+skinparam shadowing false
+skinparam padding 2
+autonumber
+
+' ============================================================
+' S-01 · Login
+' ============================================================
+@startuml
+skinparam defaultFontName "Segoe UI"
+skinparam defaultFontSize 13
+skinparam ArrowColor #0F0E17
+skinparam ArrowThickness 1.2
+skinparam LifeLineBorderColor #A7A9BE
+skinparam SequenceGroupBorderColor #0F0E17
+skinparam SequenceGroupBackgroundColor #FFF1E0
+skinparam SequenceGroupFontStyle bold
+skinparam ActorBorderColor #0F0E17
+skinparam ActorBackgroundColor #FFFFFE
+skinparam ParticipantBorderColor #0F0E17
+skinparam ParticipantBackgroundColor #FFFFFE
+skinparam shadowing false
+autonumber
+
+actor "Pengunjung" as U
+participant "Halaman masuk" as L
+participant "Pemeriksa isian" as V
+participant "Pengelola akun" as A
+participant "Basis data" as D
+
+U -> L : Membuka halaman masuk
+L -> A : Memastikan pengunjung belum masuk
+alt sudah masuk
+    A --> U : Dialihkan ke beranda
+else belum masuk
+    L --> U : Menampilkan formulir masuk
+    U -> L : Mengirim email dan kata sandi
+    L -> V : Memeriksa kelengkapan isian
+    V --> L : Isian lengkap atau ada yang salah
+    alt isian tidak lengkap
+        L --> U : Formulir ulang dengan pesan pada isian
+    else isian lengkap
+        L -> A : Mencocokkan data akun
+        A -> D : Mencari akun dengan email tersebut
+        D --> A : Data akun atau tidak ditemukan
+        alt data tidak cocok
+            A --> L : Gagal masuk
+            L --> U : Pesan umum, tanpa menunjuk isian mana
+        else data cocok
+            A --> L : Berhasil masuk
+            L -> A : Membuka sesi pengguna
+            L -> D : Mencatat waktu masuk terakhir
+            L --> U : Dialihkan ke beranda sesuai peran
+        end
+    end
+end
+@enduml
+</pre>
+            </figure>
+            <div class="titleblock">
+                <div><span>Lembar</span><b>S-01</b></div>
+                <div><span>Judul</span><b>Login</b></div>
+                <div><span>Halaman</span><code>halaman masuk</code></div>
+                <div><span>UC terkait</span><b>UC02</b></div>
+            </div>
+        </section>
+        <section class="sheet" id="s02" aria-labelledby="h-s02">
+            <div class="sheet-head">
+                <h2 id="h-s02">S-02 · Registrasi akun</h2>
+                <p>Pendaftaran mandiri selalu menghasilkan peran pengguna biasa; akun admin dibuat dari menu pengguna (UC17).</p>
+            </div>
+            <figure class="drawing" data-puml>
+<pre class="puml">
+skinparam defaultFontName "Segoe UI"
+skinparam defaultFontSize 13
+skinparam ArrowColor #0F0E17
+skinparam ArrowThickness 1.2
+skinparam LifeLineBorderColor #A7A9BE
+skinparam SequenceGroupBorderColor #0F0E17
+skinparam SequenceGroupBackgroundColor #FFF1E0
+skinparam SequenceGroupBodyBackgroundColor #FFFFFE
+skinparam SequenceGroupFontStyle bold
+skinparam SequenceBoxBorderColor #0F0E17
+skinparam ActorBorderColor #0F0E17
+skinparam ActorBackgroundColor #FFFFFE
+skinparam ParticipantBorderColor #0F0E17
+skinparam ParticipantBackgroundColor #FFFFFE
+skinparam NoteBorderColor #FF8906
+skinparam NoteBackgroundColor #FFF1E0
+skinparam shadowing false
+skinparam padding 2
+autonumber
+
+' ============================================================
+' S-02 · Registrasi akun
+' ============================================================
+@startuml
+skinparam defaultFontName "Segoe UI"
+skinparam defaultFontSize 13
+skinparam ArrowColor #0F0E17
+skinparam ArrowThickness 1.2
+skinparam LifeLineBorderColor #A7A9BE
+skinparam SequenceGroupBorderColor #0F0E17
+skinparam SequenceGroupBackgroundColor #FFF1E0
+skinparam SequenceGroupFontStyle bold
+skinparam ActorBorderColor #0F0E17
+skinparam ActorBackgroundColor #FFFFFE
+skinparam ParticipantBorderColor #0F0E17
+skinparam ParticipantBackgroundColor #FFFFFE
+skinparam shadowing false
+autonumber
+
+actor "Pengunjung" as U
+participant "Halaman daftar" as R
+participant "Pemeriksa isian" as V
+participant "Pengelola akun" as M
+participant "Basis data" as D
+
+U -> R : Membuka halaman pendaftaran
+R --> U : Menampilkan formulir pendaftaran
+U -> R : Mengirim nama, email, dan kata sandi
+R -> V : Memeriksa kelengkapan dan keunikan isian
+V -> D : Mengecek email belum dipakai
+D --> V : Hasil pemeriksaan
+alt isian belum benar
+    V --> R : Daftar kesalahan isian
+    R --> U : Formulir ulang dengan pesan pada isian
+else isian sudah benar
+    R -> M : Menyiapkan akun baru
+    M -> D : Menyimpan akun dengan peran pengguna biasa
+    D --> M : Akun tersimpan
+    M --> R : Akun siap dipakai
+    R --> U : Pemberitahuan berhasil, diarahkan ke halaman masuk
+end
+@enduml
+</pre>
+            </figure>
+            <div class="titleblock">
+                <div><span>Lembar</span><b>S-02</b></div>
+                <div><span>Judul</span><b>Registrasi akun</b></div>
+                <div><span>Halaman</span><code>halaman daftar</code></div>
+                <div><span>UC terkait</span><b>UC01</b></div>
+            </div>
+        </section>
+        <section class="sheet" id="s03" aria-labelledby="h-s03">
+            <div class="sheet-head">
+                <h2 id="h-s03">S-03 · Mulai konsultasi</h2>
+                <p>Halaman membuat data konsultasi baru yang masih kosong, lalu memindahkan pengguna ke halaman pertanyaan.
+                   Pertanyaan pertama baru ditentukan saat halaman pertanyaan dibuka.</p>
+            </div>
+            <figure class="drawing" data-puml>
+<pre class="puml">
+skinparam defaultFontName "Segoe UI"
+skinparam defaultFontSize 13
+skinparam ArrowColor #0F0E17
+skinparam ArrowThickness 1.2
+skinparam LifeLineBorderColor #A7A9BE
+skinparam SequenceGroupBorderColor #0F0E17
+skinparam SequenceGroupBackgroundColor #FFF1E0
+skinparam SequenceGroupBodyBackgroundColor #FFFFFE
+skinparam SequenceGroupFontStyle bold
+skinparam SequenceBoxBorderColor #0F0E17
+skinparam ActorBorderColor #0F0E17
+skinparam ActorBackgroundColor #FFFFFE
+skinparam ParticipantBorderColor #0F0E17
+skinparam ParticipantBackgroundColor #FFFFFE
+skinparam NoteBorderColor #FF8906
+skinparam NoteBackgroundColor #FFF1E0
+skinparam shadowing false
+skinparam padding 2
+autonumber
+
+' ============================================================
+' S-03 · Mulai konsultasi
+' ============================================================
+@startuml
+skinparam defaultFontName "Segoe UI"
+skinparam defaultFontSize 13
+skinparam ArrowColor #0F0E17
+skinparam ArrowThickness 1.2
+skinparam LifeLineBorderColor #A7A9BE
+skinparam SequenceGroupBorderColor #0F0E17
+skinparam SequenceGroupBackgroundColor #FFF1E0
+skinparam SequenceGroupFontStyle bold
+skinparam ActorBorderColor #0F0E17
+skinparam ActorBackgroundColor #FFFFFE
+skinparam ParticipantBorderColor #0F0E17
+skinparam ParticipantBackgroundColor #FFFFFE
+skinparam shadowing false
+autonumber
+
+actor "Pengunjung" as U
+participant "Formulir konsultasi" as C
+participant "Pengelola konsultasi" as S
+participant "Basis data" as D
+
+U -> C : Mengisi data motor lalu mengirim
+C -> D : Memastikan ada aturan aktif
+D --> C : Jumlah aturan aktif
+alt belum ada aturan aktif
+    C --> U : Peringatan bahwa basis pengetahuan masih kosong
+else aturan tersedia
+    alt isian belum lengkap
+        C --> U : Formulir ulang dengan pesan pada isian
+    else isian lengkap
+        C -> S : Memulai konsultasi baru
+        S -> D : Membuat nomor konsultasi
+        D --> S : Nomor konsultasi
+        S -> D : Menyimpan konsultasi berstatus berjalan
+        D --> S : Tersimpan
+        S --> C : Konsultasi siap
+        C --> U : Membuka pertanyaan pertama
+    end
+end
+@enduml
+</pre>
+            </figure>
+            <div class="titleblock">
+                <div><span>Lembar</span><b>S-03</b></div>
+                <div><span>Judul</span><b>Mulai konsultasi</b></div>
+                <div><span>Halaman</span><code>formulir konsultasi</code></div>
+                <div><span>UC terkait</span><b>UC05</b></div>
+            </div>
+        </section>
+        <section class="sheet" id="s04" aria-labelledby="h-s04">
+            <div class="sheet-head">
+                <h2 id="h-s04">S-04 · Jawab pertanyaan &amp; penalaran</h2>
+                <p>Setiap jawaban disimpan, lalu seluruh jawaban dibaca ulang oleh mesin penalaran. Karena itu koreksi
+                   jawaban terakhir cukup membuang satu jawaban, tanpa menyimpan status penalaran.</p>
+            </div>
+            <figure class="drawing" data-puml>
+<pre class="puml">
+skinparam defaultFontName "Segoe UI"
+skinparam defaultFontSize 13
+skinparam ArrowColor #0F0E17
+skinparam ArrowThickness 1.2
+skinparam LifeLineBorderColor #A7A9BE
+skinparam SequenceGroupBorderColor #0F0E17
+skinparam SequenceGroupBackgroundColor #FFF1E0
+skinparam SequenceGroupBodyBackgroundColor #FFFFFE
+skinparam SequenceGroupFontStyle bold
+skinparam SequenceBoxBorderColor #0F0E17
+skinparam ActorBorderColor #0F0E17
+skinparam ActorBackgroundColor #FFFFFE
+skinparam ParticipantBorderColor #0F0E17
+skinparam ParticipantBackgroundColor #FFFFFE
+skinparam NoteBorderColor #FF8906
+skinparam NoteBackgroundColor #FFF1E0
+skinparam shadowing false
+skinparam padding 2
+autonumber
+
+' ============================================================
+' S-04 · Jawab pertanyaan & penalaran
+' ============================================================
+@startuml
+skinparam defaultFontName "Segoe UI"
+skinparam defaultFontSize 13
+skinparam ArrowColor #0F0E17
+skinparam ArrowThickness 1.2
+skinparam LifeLineBorderColor #A7A9BE
+skinparam SequenceGroupBorderColor #0F0E17
+skinparam SequenceGroupBackgroundColor #FFF1E0
+skinparam SequenceGroupFontStyle bold
+skinparam ActorBorderColor #0F0E17
+skinparam ActorBackgroundColor #FFFFFE
+skinparam ParticipantBorderColor #0F0E17
+skinparam ParticipantBackgroundColor #FFFFFE
+skinparam shadowing false
+autonumber
+
+actor "Pengunjung" as U
+participant "Halaman pertanyaan" as T
+participant "Pengelola konsultasi" as S
+participant "Mesin penalaran" as E
+participant "Basis data" as D
+
+U -> T : Membuka halaman pertanyaan
+T -> S : Memastikan konsultasi milik pengguna
+alt bukan miliknya
+    S --> U : Akses ditolak, kembali ke halaman sebelumnya
+else miliknya
+    S -> E : Menilai ulang seluruh jawaban
+    E --> S : Pertanyaan aktif dan kemajuan penalaran
+    S --> T : Pertanyaan aktif
+    T --> U : Menampilkan pertanyaan dan tombol Ya atau Tidak
+    U -> T : Menjawab pertanyaan
+    T -> S : Meneruskan jawaban
+    S -> D : Menyimpan jawaban
+    S -> E : Menilai ulang
+    alt masih ada pertanyaan
+        E --> S : Pertanyaan berikutnya
+        S --> U : Pertanyaan berikutnya
+    else penalaran selesai
+        E --> S : Penyebab yang terbukti atau semua gugur
+        S -> D : Menyimpan hasil dan jejak penalaran
+        S --> U : Membuka halaman hasil diagnosa
+    end
+end
+@enduml
+</pre>
+            </figure>
+            <div class="titleblock">
+                <div><span>Lembar</span><b>S-04</b></div>
+                <div><span>Judul</span><b>Jawab pertanyaan &amp; penalaran</b></div>
+                <div><span>Halaman</span><code>halaman pertanyaan</code></div>
+                <div><span>UC terkait</span><b>UC06</b></div>
+            </div>
+        </section>
+        <section class="sheet" id="s05" aria-labelledby="h-s05">
+            <div class="sheet-head">
+                <h2 id="h-s05">S-05 · Lihat hasil diagnosa</h2>
+                <p>Semua yang ditampilkan berasal dari data yang sudah dibekukan saat konsultasi selesai, kecuali nama dan harga sparepart
+                   yang dibaca dari tabel master.</p>
+            </div>
+            <figure class="drawing" data-puml>
+<pre class="puml">
+skinparam defaultFontName "Segoe UI"
+skinparam defaultFontSize 13
+skinparam ArrowColor #0F0E17
+skinparam ArrowThickness 1.2
+skinparam LifeLineBorderColor #A7A9BE
+skinparam SequenceGroupBorderColor #0F0E17
+skinparam SequenceGroupBackgroundColor #FFF1E0
+skinparam SequenceGroupBodyBackgroundColor #FFFFFE
+skinparam SequenceGroupFontStyle bold
+skinparam SequenceBoxBorderColor #0F0E17
+skinparam ActorBorderColor #0F0E17
+skinparam ActorBackgroundColor #FFFFFE
+skinparam ParticipantBorderColor #0F0E17
+skinparam ParticipantBackgroundColor #FFFFFE
+skinparam NoteBorderColor #FF8906
+skinparam NoteBackgroundColor #FFF1E0
+skinparam shadowing false
+skinparam padding 2
+autonumber
+
+' ============================================================
+' S-05 · Lihat hasil diagnosa
+' ============================================================
+@startuml
+skinparam defaultFontName "Segoe UI"
+skinparam defaultFontSize 13
+skinparam ArrowColor #0F0E17
+skinparam ArrowThickness 1.2
+skinparam LifeLineBorderColor #A7A9BE
+skinparam SequenceGroupBorderColor #0F0E17
+skinparam SequenceGroupBackgroundColor #FFF1E0
+skinparam SequenceGroupFontStyle bold
+skinparam ActorBorderColor #0F0E17
+skinparam ActorBackgroundColor #FFFFFE
+skinparam ParticipantBorderColor #0F0E17
+skinparam ParticipantBackgroundColor #FFFFFE
+skinparam shadowing false
+autonumber
+
+actor "Pengguna" as U
+participant "Halaman hasil" as H
+participant "Pengelola konsultasi" as S
+participant "Basis data" as D
+
+U -> H : Membuka halaman hasil
+H -> S : Memeriksa hak akses konsultasi
+alt tidak berhak atau tidak ada
+    S --> U : Halaman tidak ditemukan atau akses ditolak
+else berhak
+    S -> D : Mengambil data motor, hasil, dan jejak penalaran
+    D --> S : Data lengkap
+    S --> H : Data konsultasi
+    alt tidak ada kerusakan yang cocok
+        H --> U : Pesan gejala belum cocok dan saran periksa langsung
+    else ada kerusakan
+        H --> U : Kerusakan, sparepart, perkiraan biaya, dan urutan penalaran
+    end
+end
+@enduml
+</pre>
+            </figure>
+            <div class="titleblock">
+                <div><span>Lembar</span><b>S-05</b></div>
+                <div><span>Judul</span><b>Lihat hasil diagnosa</b></div>
+                <div><span>Halaman</span><code>halaman hasil</code></div>
+                <div><span>UC terkait</span><b>UC09</b></div>
+            </div>
+        </section>
+        <section class="sheet" id="s06" aria-labelledby="h-s06">
+            <div class="sheet-head">
+                <h2 id="h-s06">S-06 · Unduh work order PDF</h2>
+                <p>Hak akses diperiksa lebih dulu, baru berkasnya disusun. Permintaan yang tidak berhak tidak sampai
+                   memicu pembuatan berkas.</p>
+            </div>
+            <figure class="drawing" data-puml>
+<pre class="puml">
+skinparam defaultFontName "Segoe UI"
+skinparam defaultFontSize 13
+skinparam ArrowColor #0F0E17
+skinparam ArrowThickness 1.2
+skinparam LifeLineBorderColor #A7A9BE
+skinparam SequenceGroupBorderColor #0F0E17
+skinparam SequenceGroupBackgroundColor #FFF1E0
+skinparam SequenceGroupBodyBackgroundColor #FFFFFE
+skinparam SequenceGroupFontStyle bold
+skinparam SequenceBoxBorderColor #0F0E17
+skinparam ActorBorderColor #0F0E17
+skinparam ActorBackgroundColor #FFFFFE
+skinparam ParticipantBorderColor #0F0E17
+skinparam ParticipantBackgroundColor #FFFFFE
+skinparam NoteBorderColor #FF8906
+skinparam NoteBackgroundColor #FFF1E0
+skinparam shadowing false
+skinparam padding 2
+autonumber
+
+' ============================================================
+' S-06 · Unduh work order PDF
+' ============================================================
+@startuml
+skinparam defaultFontName "Segoe UI"
+skinparam defaultFontSize 13
+skinparam ArrowColor #0F0E17
+skinparam ArrowThickness 1.2
+skinparam LifeLineBorderColor #A7A9BE
+skinparam SequenceGroupBorderColor #0F0E17
+skinparam SequenceGroupBackgroundColor #FFF1E0
+skinparam SequenceGroupFontStyle bold
+skinparam ActorBorderColor #0F0E17
+skinparam ActorBackgroundColor #FFFFFE
+skinparam ParticipantBorderColor #0F0E17
+skinparam ParticipantBackgroundColor #FFFFFE
+skinparam shadowing false
+autonumber
+
+actor "Pengguna" as U
+participant "Halaman unduhan" as P
+participant "Pengelola konsultasi" as S
+participant "Pembuat berkas" as X
+participant "Basis data" as D
+
+U -> P : Menekan tombol unduh work order
+P -> S : Memeriksa hak akses
+alt tidak berhak
+    S --> U : Akses ditolak
+else berhak
+    S -> D : Mengambil data konsultasi dan hasil
+    D --> S : Data konsultasi
+    alt belum ada hasil diagnosa
+        S --> U : Pemberitahuan work order belum bisa dibuat
+    else hasil tersedia
+        S --> P : Data siap dicetak
+        P -> X : Menyusun halaman work order A4 tegak
+        X --> P : Berkas PDF dengan nomor halaman
+        P --> U : Berkas work order terunduh
+    end
+end
+@enduml
+</pre>
+            </figure>
+            <div class="titleblock">
+                <div><span>Lembar</span><b>S-06</b></div>
+                <div><span>Judul</span><b>Unduh work order PDF</b></div>
+                <div><span>Halaman</span><code>halaman unduhan</code></div>
+                <div><span>UC terkait</span><b>UC10</b></div>
+            </div>
+        </section>
+        <section class="sheet" id="s07" aria-labelledby="h-s07">
+            <div class="sheet-head">
+                <h2 id="h-s07">S-07 · Laporan PDF admin</h2>
+                <p>Pratinjau di layar dan berkas PDF memakai sumber data yang sama, sehingga angka di layar dan di
+                   kertas selalu sama.</p>
+            </div>
+            <figure class="drawing" data-puml>
+<pre class="puml">
+skinparam defaultFontName "Segoe UI"
+skinparam defaultFontSize 13
+skinparam ArrowColor #0F0E17
+skinparam ArrowThickness 1.2
+skinparam LifeLineBorderColor #A7A9BE
+skinparam SequenceGroupBorderColor #0F0E17
+skinparam SequenceGroupBackgroundColor #FFF1E0
+skinparam SequenceGroupBodyBackgroundColor #FFFFFE
+skinparam SequenceGroupFontStyle bold
+skinparam SequenceBoxBorderColor #0F0E17
+skinparam ActorBorderColor #0F0E17
+skinparam ActorBackgroundColor #FFFFFE
+skinparam ParticipantBorderColor #0F0E17
+skinparam ParticipantBackgroundColor #FFFFFE
+skinparam NoteBorderColor #FF8906
+skinparam NoteBackgroundColor #FFF1E0
+skinparam shadowing false
+skinparam padding 2
+autonumber
+
+' ============================================================
+' S-07 · Laporan PDF admin
+' ============================================================
+@startuml
+skinparam defaultFontName "Segoe UI"
+skinparam defaultFontSize 13
+skinparam ArrowColor #0F0E17
+skinparam ArrowThickness 1.2
+skinparam LifeLineBorderColor #A7A9BE
+skinparam SequenceGroupBorderColor #0F0E17
+skinparam SequenceGroupBackgroundColor #FFF1E0
+skinparam SequenceGroupFontStyle bold
+skinparam ActorBorderColor #0F0E17
+skinparam ActorBackgroundColor #FFFFFE
+skinparam ParticipantBorderColor #0F0E17
+skinparam ParticipantBackgroundColor #FFFFFE
+skinparam shadowing false
+autonumber
+
+actor "Admin" as U
+participant "Menu laporan" as L
+participant "Penyusun laporan" as R
+participant "Pembuat berkas" as X
+participant "Basis data" as D
+
+U -> L : Membuka menu laporan
+L --> U : Tujuh pilihan jenis laporan
+U -> L : Memilih jenis dan rentang tanggal
+L -> R : Menyiapkan data laporan
+R -> D : Mengambil data sesuai jenis laporan
+D --> R : Data laporan
+alt rentang tanggal tidak wajar
+    R --> L : Memakai rentang bawaan
+else rentang wajar
+    R --> L : Memakai rentang pilihan admin
+end
+L --> U : Ringkasan dan pratinjau tabel
+opt menekan unduh PDF
+    L -> X : Menyusun berkas sesuai jenis laporan
+    X --> U : Berkas laporan terunduh
+end
+@enduml
+</pre>
+            </figure>
+            <div class="titleblock">
+                <div><span>Lembar</span><b>S-07</b></div>
+                <div><span>Judul</span><b>Laporan PDF admin</b></div>
+                <div><span>Halaman</span><code>menu laporan</code></div>
+                <div><span>UC terkait</span><b>UC19</b></div>
+            </div>
+        </section>
+    </main>
+</div>
+<script src="assets/plantuml.js"></script>
+<script src="assets/uml.js"></script>
+</body>
+</html>

@@ -1,0 +1,14 @@
+{
+  "models": 6,
+  "operations": 27,
+  "checkedPhp": true,
+  "svgCurrent": true,
+  "drawioCurrent": true,
+  "checks": [
+    "Semua method dan pemisah kompartemen tampil di SVG halaman.",
+    "Zoom dan fit bekerja.",
+    "Pan aktif pada skala besar.",
+    "Desktop dan ponsel tidak mengalami overflow; tangkapan layar tersimpan."
+  ],
+  "errors": []
+}

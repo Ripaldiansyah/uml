@@ -1,0 +1,64 @@
+' ============================================================
+' A-02 · Satu langkah inferensi (backward chaining)
+' ============================================================
+@startuml
+skinparam defaultFontName "Segoe UI"
+skinparam defaultFontSize 13
+skinparam ArrowColor #0F0E17
+skinparam ArrowThickness 1.2
+skinparam ActivityBorderColor #0F0E17
+skinparam ActivityBackgroundColor #FFFFFE
+skinparam ActivityBorderThickness 1.1
+skinparam ActivityDiamondBackgroundColor #FFF1E0
+skinparam ActivityDiamondBorderColor #0F0E17
+skinparam SwimlaneTitleBackgroundColor #0F0E17
+skinparam SwimlaneTitleFontColor #FFFFFE
+skinparam SwimlaneTitleFontStyle bold
+skinparam SwimlaneBorderColor #0F0E17
+skinparam shadowing false
+skinparam ActivityPadding 14
+skinparam padding 2
+
+|Pengguna|
+start
+' do-while: alur selalu kembali ke sini bila masih ada premis yang harus ditanyakan
+repeat
+  :Menjawab satu pertanyaan (Ya / Tidak);
+
+  |Mesin penilai|
+  if (Jawaban untuk pertanyaan aktif?) then (Tidak cocok)
+    :Abaikan jawaban, pertanyaan dimunculkan lagi;
+    break
+  else (Cocok)
+    :Menyusun daftar gejala terjawab;
+  endif
+
+  :Mulai dari hipotesis pertama;
+  repeat
+    :Mengambil satu hipotesis penyebab;
+    if (Ada premis yang terjawab Tidak?) then (Ya)
+      :Menandai hipotesis gugur beserta gejalanya;
+    else (Tidak ada)
+      if (Masih ada premis yang belum dijawab?) then (Ya)
+        :Menyimpan hipotesis sebagai kandidat terbuka;
+      else (Semua sudah dijawab)
+        :Menandai hipotesis terbukti;
+        ' hipotesis terbukti menghentikan penilaian hipotesis berikutnya
+        break
+      endif
+    endif
+  repeat while (Masih ada hipotesis yang belum diuji?) is (Ya) not (Tidak)
+
+  if (Ada kandidat terbuka?) then (Tidak ada)
+    :Menandai konsultasi gagal, semua hipotesis gugur;
+    break
+  else (Ada)
+    :Mengurutkan kandidat: jawaban Ya terbanyak lebih dulu;
+    :Mengambil pertanyaan pertama yang belum terjawab;
+  endif
+repeat while (Masih ada pertanyaan?) is (Ya) not (Tidak)
+
+|Pengguna|
+:Melihat hasil diagnosa atau pertanyaan lanjutan;
+stop
+@enduml

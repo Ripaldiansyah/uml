@@ -1,0 +1,77 @@
+' ============================================================
+' D-01 · Use case diagram (notasi UML legacy, tanpa catatan)
+' ============================================================
+@startuml
+left to right direction
+skinparam defaultFontName "Segoe UI"
+skinparam defaultFontSize 13
+skinparam ArrowColor #0F0E17
+skinparam ArrowThickness 1.2
+skinparam ActorBorderColor #0F0E17
+skinparam ActorBackgroundColor #FFFFFE
+skinparam UsecaseBorderColor #0F0E17
+skinparam UsecaseBackgroundColor #FFFFFE
+skinparam UsecaseBorderThickness 1.2
+skinparam UsecaseFontSize 13
+skinparam RectangleBorderColor #0F0E17
+skinparam RectangleBorderThickness 1.5
+skinparam RectangleBackgroundColor #FFFFFE
+skinparam shadowing false
+skinparam Padding 4
+
+actor "Pengunjung" as P
+actor "Guest" as G
+actor "Admin" as A
+
+rectangle "Sistem SPK Servis & Sparepart — AKC Workshop" {
+    usecase "Registrasi akun" as UC01
+    usecase "Login" as UC02
+    usecase "Logout" as UC03
+    usecase "Kelola profil" as UC04
+    usecase "Mulai konsultasi" as UC05
+    usecase "Jawab pertanyaan" as UC06
+    usecase "Ubah jawaban" as UC07
+    usecase "Batalkan konsultasi" as UC08
+    usecase "Lihat hasil diagnosa" as UC09
+    usecase "Unduh work order" as UC10
+    usecase "Riwayat saya" as UC11
+    usecase "Dashboard" as UC12 #FFF1E0
+    usecase "Kelola gejala" as UC13 #FFF1E0
+    usecase "Kelola kerusakan" as UC14 #FFF1E0
+    usecase "Kelola sparepart" as UC15 #FFF1E0
+    usecase "Kelola aturan" as UC16 #FFF1E0
+    usecase "Kelola pengguna" as UC17 #FFF1E0
+    usecase "Riwayat konsultasi" as UC18 #FFF1E0
+    usecase "Cetak laporan" as UC19 #FFF1E0
+}
+
+' Admin mewarisi seluruh hak Guest
+A -up-|> G
+
+' Pengunjung yang belum masuk
+P --> UC01
+P --> UC02
+
+' Setelah masuk, Guest dapat membuka halaman pribadi
+G --> UC03
+G --> UC04
+G --> UC05
+G --> UC09
+G --> UC11
+
+' Rincian di dalam konsultasi (panah menunjuk use case dasar)
+UC05 ..> UC06 : «include»
+UC07 ..> UC06 : «extend»
+UC08 ..> UC06 : «extend»
+UC10 ..> UC09 : «extend»
+
+' Menu khusus admin
+A --> UC12
+A --> UC13
+A --> UC14
+A --> UC15
+A --> UC16
+A --> UC17
+A --> UC18
+A --> UC19
+@enduml

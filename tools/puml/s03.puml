@@ -1,0 +1,43 @@
+' ============================================================
+' S-03 · Mulai konsultasi
+' ============================================================
+@startuml
+skinparam defaultFontName "Segoe UI"
+skinparam defaultFontSize 13
+skinparam ArrowColor #0F0E17
+skinparam ArrowThickness 1.2
+skinparam LifeLineBorderColor #A7A9BE
+skinparam SequenceGroupBorderColor #0F0E17
+skinparam SequenceGroupBackgroundColor #FFF1E0
+skinparam SequenceGroupFontStyle bold
+skinparam ActorBorderColor #0F0E17
+skinparam ActorBackgroundColor #FFFFFE
+skinparam ParticipantBorderColor #0F0E17
+skinparam ParticipantBackgroundColor #FFFFFE
+skinparam shadowing false
+autonumber
+
+actor "Pengunjung" as U
+participant "Formulir konsultasi" as C
+participant "Pengelola konsultasi" as S
+participant "Basis data" as D
+
+U -> C : Mengisi data motor lalu mengirim
+C -> D : Memastikan ada aturan aktif
+D --> C : Jumlah aturan aktif
+alt belum ada aturan aktif
+    C --> U : Peringatan bahwa basis pengetahuan masih kosong
+else aturan tersedia
+    alt isian belum lengkap
+        C --> U : Formulir ulang dengan pesan pada isian
+    else isian lengkap
+        C -> S : Memulai konsultasi baru
+        S -> D : Membuat nomor konsultasi
+        D --> S : Nomor konsultasi
+        S -> D : Menyimpan konsultasi berstatus berjalan
+        D --> S : Tersimpan
+        S --> C : Konsultasi siap
+        C --> U : Membuka pertanyaan pertama
+    end
+end
+@enduml

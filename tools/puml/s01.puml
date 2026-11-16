@@ -1,0 +1,52 @@
+' ============================================================
+' S-01 · Login
+' ============================================================
+@startuml
+skinparam defaultFontName "Segoe UI"
+skinparam defaultFontSize 13
+skinparam ArrowColor #0F0E17
+skinparam ArrowThickness 1.2
+skinparam LifeLineBorderColor #A7A9BE
+skinparam SequenceGroupBorderColor #0F0E17
+skinparam SequenceGroupBackgroundColor #FFF1E0
+skinparam SequenceGroupFontStyle bold
+skinparam ActorBorderColor #0F0E17
+skinparam ActorBackgroundColor #FFFFFE
+skinparam ParticipantBorderColor #0F0E17
+skinparam ParticipantBackgroundColor #FFFFFE
+skinparam shadowing false
+autonumber
+
+actor "Pengunjung" as U
+participant "Halaman masuk" as L
+participant "Pemeriksa isian" as V
+participant "Pengelola akun" as A
+participant "Basis data" as D
+
+U -> L : Membuka halaman masuk
+L -> A : Memastikan pengunjung belum masuk
+alt sudah masuk
+    A --> U : Dialihkan ke beranda
+else belum masuk
+    L --> U : Menampilkan formulir masuk
+    U -> L : Mengirim email dan kata sandi
+    L -> V : Memeriksa kelengkapan isian
+    V --> L : Isian lengkap atau ada yang salah
+    alt isian tidak lengkap
+        L --> U : Formulir ulang dengan pesan pada isian
+    else isian lengkap
+        L -> A : Mencocokkan data akun
+        A -> D : Mencari akun dengan email tersebut
+        D --> A : Data akun atau tidak ditemukan
+        alt data tidak cocok
+            A --> L : Gagal masuk
+            L --> U : Pesan umum, tanpa menunjuk isian mana
+        else data cocok
+            A --> L : Berhasil masuk
+            L -> A : Membuka sesi pengguna
+            L -> D : Mencatat waktu masuk terakhir
+            L --> U : Dialihkan ke beranda sesuai peran
+        end
+    end
+end
+@enduml

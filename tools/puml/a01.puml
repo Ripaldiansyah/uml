@@ -1,0 +1,47 @@
+' ============================================================
+' A-01 · Registrasi & login
+' ============================================================
+@startuml
+skinparam defaultFontName "Segoe UI"
+skinparam defaultFontSize 13
+skinparam ArrowColor #0F0E17
+skinparam ArrowThickness 1.2
+skinparam ActivityBorderColor #0F0E17
+skinparam ActivityBackgroundColor #FFFFFE
+skinparam ActivityBorderThickness 1.1
+skinparam ActivityDiamondBackgroundColor #FFF1E0
+skinparam ActivityDiamondBorderColor #0F0E17
+skinparam SwimlaneTitleBackgroundColor #0F0E17
+skinparam SwimlaneTitleFontColor #FFFFFE
+skinparam SwimlaneTitleFontStyle bold
+skinparam SwimlaneBorderColor #0F0E17
+skinparam shadowing false
+skinparam ActivityPadding 16
+skinparam padding 2
+
+|Pengunjung|
+start
+:Membuka halaman masuk;
+if (Sudah punya akun?) then (Sudah)
+  :Mengisi email dan kata sandi;
+else (Belum)
+  :Mengisi nama, email, dan kata sandi;
+  :Menekan tombol daftar;
+endif
+:Sistem memeriksa semua isian;
+if (Semua isian benar?) then (Tidak)
+  :Menampilkan pesan pada isian yang salah;
+  stop
+else (Ya)
+  :Membuka beranda sesuai peran;
+endif
+stop
+
+|Sistem|
+if (Akun baru?) then (Ya)
+  :Menyiapkan halaman awal pengguna baru;
+else (Tidak)
+  :Memakai menu sesuai peran;
+endif
+stop
+@enduml

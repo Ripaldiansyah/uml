@@ -1,0 +1,48 @@
+' ============================================================
+' S-04 · Jawab pertanyaan & penalaran
+' ============================================================
+@startuml
+skinparam defaultFontName "Segoe UI"
+skinparam defaultFontSize 13
+skinparam ArrowColor #0F0E17
+skinparam ArrowThickness 1.2
+skinparam LifeLineBorderColor #A7A9BE
+skinparam SequenceGroupBorderColor #0F0E17
+skinparam SequenceGroupBackgroundColor #FFF1E0
+skinparam SequenceGroupFontStyle bold
+skinparam ActorBorderColor #0F0E17
+skinparam ActorBackgroundColor #FFFFFE
+skinparam ParticipantBorderColor #0F0E17
+skinparam ParticipantBackgroundColor #FFFFFE
+skinparam shadowing false
+autonumber
+
+actor "Pengunjung" as U
+participant "Halaman pertanyaan" as T
+participant "Pengelola konsultasi" as S
+participant "Mesin penalaran" as E
+participant "Basis data" as D
+
+U -> T : Membuka halaman pertanyaan
+T -> S : Memastikan konsultasi milik pengguna
+alt bukan miliknya
+    S --> U : Akses ditolak, kembali ke halaman sebelumnya
+else miliknya
+    S -> E : Menilai ulang seluruh jawaban
+    E --> S : Pertanyaan aktif dan kemajuan penalaran
+    S --> T : Pertanyaan aktif
+    T --> U : Menampilkan pertanyaan dan tombol Ya atau Tidak
+    U -> T : Menjawab pertanyaan
+    T -> S : Meneruskan jawaban
+    S -> D : Menyimpan jawaban
+    S -> E : Menilai ulang
+    alt masih ada pertanyaan
+        E --> S : Pertanyaan berikutnya
+        S --> U : Pertanyaan berikutnya
+    else penalaran selesai
+        E --> S : Penyebab yang terbukti atau semua gugur
+        S -> D : Menyimpan hasil dan jejak penalaran
+        S --> U : Membuka halaman hasil diagnosa
+    end
+end
+@enduml

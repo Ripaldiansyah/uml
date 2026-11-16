@@ -1,0 +1,57 @@
+' ============================================================
+' A-04 · Menjawab pertanyaan
+' ============================================================
+@startuml
+skinparam defaultFontName "Segoe UI"
+skinparam defaultFontSize 13
+skinparam ArrowColor #0F0E17
+skinparam ArrowThickness 1.2
+skinparam ActivityBorderColor #0F0E17
+skinparam ActivityBackgroundColor #FFFFFE
+skinparam ActivityBorderThickness 1.1
+skinparam ActivityDiamondBackgroundColor #FFF1E0
+skinparam ActivityDiamondBorderColor #0F0E17
+skinparam SwimlaneTitleBackgroundColor #0F0E17
+skinparam SwimlaneTitleFontColor #FFFFFE
+skinparam SwimlaneTitleFontStyle bold
+skinparam SwimlaneBorderColor #0F0E17
+skinparam shadowing false
+skinparam ActivityPadding 14
+skinparam padding 2
+
+|Pengguna|
+start
+:Membuka halaman pertanyaan;
+
+|Sistem|
+if (Konsultasi miliknya sendiri?) then (Bukan)
+  :Menolak akses dan kembali ke halaman sebelumnya;
+  stop
+else (Ya)
+  :Menampilkan pertanyaan aktif beserta kemajuan penilaian;
+endif
+if (Menekan Batalkan?) then (Ya)
+  :Menandai konsultasi dihentikan;
+  |Pengguna|
+  :Kembali ke beranda;
+  stop
+else (Tidak)
+  |Sistem|
+  if (Menekan Ubah jawaban?) then (Ya)
+    :Membuang jawaban terakhir;
+    :Menyegarkan pertanyaan aktif;
+    |Pengguna|
+    :Mengulang dari pertanyaan yang sama;
+    stop
+  else (Tidak, menjawab pertanyaan)
+    repeat
+      :Menyimpan jawaban;
+      :Menjalankan penilaian ulang;
+    repeat while (Masih ada pertanyaan?) is (Ya) not (Tidak)
+    :Menandai konsultasi selesai dan menyimpan hasil;
+    |Pengguna|
+    :Membuka halaman hasil diagnosa;
+    stop
+  endif
+endif
+@enduml

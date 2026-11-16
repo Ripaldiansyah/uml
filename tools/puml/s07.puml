@@ -1,0 +1,42 @@
+' ============================================================
+' S-07 · Laporan PDF admin
+' ============================================================
+@startuml
+skinparam defaultFontName "Segoe UI"
+skinparam defaultFontSize 13
+skinparam ArrowColor #0F0E17
+skinparam ArrowThickness 1.2
+skinparam LifeLineBorderColor #A7A9BE
+skinparam SequenceGroupBorderColor #0F0E17
+skinparam SequenceGroupBackgroundColor #FFF1E0
+skinparam SequenceGroupFontStyle bold
+skinparam ActorBorderColor #0F0E17
+skinparam ActorBackgroundColor #FFFFFE
+skinparam ParticipantBorderColor #0F0E17
+skinparam ParticipantBackgroundColor #FFFFFE
+skinparam shadowing false
+autonumber
+
+actor "Admin" as U
+participant "Menu laporan" as L
+participant "Penyusun laporan" as R
+participant "Pembuat berkas" as X
+participant "Basis data" as D
+
+U -> L : Membuka menu laporan
+L --> U : Tujuh pilihan jenis laporan
+U -> L : Memilih jenis dan rentang tanggal
+L -> R : Menyiapkan data laporan
+R -> D : Mengambil data sesuai jenis laporan
+D --> R : Data laporan
+alt rentang tanggal tidak wajar
+    R --> L : Memakai rentang bawaan
+else rentang wajar
+    R --> L : Memakai rentang pilihan admin
+end
+L --> U : Ringkasan dan pratinjau tabel
+opt menekan unduh PDF
+    L -> X : Menyusun berkas sesuai jenis laporan
+    X --> U : Berkas laporan terunduh
+end
+@enduml
